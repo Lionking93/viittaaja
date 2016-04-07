@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Referencelists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @referencelists.each do |referencelist| %>
+      <tr>
+        <td><%= referencelist.user_id %></td>
+        <td><%= referencelist.name %></td>
+        <td><%= link_to 'Show', referencelist %></td>
+        <td><%= link_to 'Edit', edit_referencelist_path(referencelist) %></td>
+        <td><%= link_to 'Destroy', referencelist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Referencelist', new_referencelist_path %>
