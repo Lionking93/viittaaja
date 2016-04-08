@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'users#index'
+  root 'referencelists#index'
   resources :referencelists do
     get 'bibtex', on: :member
   end

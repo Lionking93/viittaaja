@@ -9,7 +9,30 @@
   <strong>Name:</strong>
   <%= @referencelist.name %>
 </p>
-
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <td>Year</td><td>Publisher</td><td>Author</td><td>Title</td><td>Address</td><td>Pages</td><td>Volume</td><td>Edition</td><td>Month</td><td>Series</td><td>Note</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @references.each do |reference| %>
+      <tr>
+        <td><%= reference.year %></td>
+        <td><%= reference.publisher %></td>
+        <td><%= reference.author %></td>
+        <td><%= reference.title %></td>
+        <td><%= reference.address %></td>
+        <td><%= reference.pages %></td>
+        <td><%= reference.volume %></td>
+        <td><%= reference.edition %></td>
+        <td><%= reference.month %></td>
+        <td><%= reference.series %></td>
+        <td><%= reference.note %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <%= link_to 'Edit', edit_referencelist_path(@referencelist) %> |
 <%= link_to 'Back', referencelists_path %>
 <%= link_to 'Bibtex', bibtex_referencelist_path %>
