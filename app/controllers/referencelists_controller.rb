@@ -18,6 +18,7 @@ class ReferencelistsController < ApplicationController
   # GET /referencelists/1
   # GET /referencelists/1.json
   def show
+    @references = Reference.all.where referencelist_id:@referencelist.id
   end
 
   # GET /referencelists/new
