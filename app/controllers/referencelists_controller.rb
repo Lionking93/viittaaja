@@ -6,7 +6,7 @@ class ReferencelistsController < ApplicationController
   def bibtex
     data = @referencelist.references
 
-    convert(data)
+    @bibtex = convert(data)
   end
 
   # GET /referencelists
