@@ -8,10 +8,4 @@ RSpec.describe Reference, type: :model do
     expect(Reference.count).to eq(1)
   end
 
-  it "with improper inputs is not valid and saved" do
-    reference = Reference.create year:"mummo lol"
-
-    expect(reference.valid?).to be(false)
-    expect(Reference.count).to eq(0)
-  end
 end
