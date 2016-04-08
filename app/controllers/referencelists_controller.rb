@@ -1,5 +1,13 @@
 class ReferencelistsController < ApplicationController
-  before_action :set_referencelist, only: [:show, :edit, :update, :destroy]
+  before_action :set_referencelist, only: [:show, :edit, :update, :destroy, :bibtex]
+
+  include BibtexConverter
+
+  def bibtex
+    data = @referencelist.references
+
+    convert(data)
+  end
 
   # GET /referencelists
   # GET /referencelists.json
