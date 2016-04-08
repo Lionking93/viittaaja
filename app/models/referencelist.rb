@@ -1,5 +1,6 @@
 class Referencelist < ActiveRecord::Base
-  belongs_to :users, :foreign_key => "user_id"
+  belongs_to :user
+  has_many :references
 
   def to_s
     return self.name.to_s
