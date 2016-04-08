@@ -1,18 +1,22 @@
 <p id="notice"><%= notice %></p>
-
 <p>
-  <strong>User:</strong>
-  <%= @referencelist.user_id %>
-</p>
+  <h2>Name: <%= @referencelist.name %></h2>
 
-<p>
-  <strong>Name:</strong>
-  <%= @referencelist.name %>
 </p>
 <table class="table table-bordered">
   <thead>
     <tr>
-      <td>Year</td><td>Publisher</td><td>Author</td><td>Title</td><td>Address</td><td>Pages</td><td>Volume</td><td>Edition</td><td>Month</td><td>Series</td><td>Note</td>
+      <th>Year</th>
+      <th>Publisher</th>
+      <th>Author</th>
+      <th>Title</th>
+      <th>Address</th>
+      <th>Pages</th>
+      <th>Volume</th>
+      <th>Edition</th>
+      <th>Month</th>
+      <th>Series</th>
+      <th>Note</th>
     </tr>
   </thead>
   <tbody>
@@ -33,6 +37,7 @@
     <% end %>
   </tbody>
 </table>
-<%= link_to 'Edit', edit_referencelist_path(@referencelist) %> |
-<%= link_to 'Back', referencelists_path %>
-<%= link_to 'Bibtex', bibtex_referencelist_path %>
+<%# link_to 'Edit', edit_referencelist_path(@referencelist), class:"btn btn-primary" %>
+<%= link_to 'Back', referencelists_path, class:"btn btn-primary" %>
+<%= link_to 'Bibtex', bibtex_referencelist_path, class:"btn btn-primary" %>
+<%= link_to 'Add Reference', new_reference_path, class:"btn btn-primary" %>

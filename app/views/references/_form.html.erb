@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field hidden">
     <%= f.label :referencelist_id %><br>
     <%= f.select :referencelist_id, options_from_collection_for_select(@referencelists, :id, :to_s) %>
   </div>
@@ -60,6 +60,6 @@
     <%= f.text_field :note %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class:"btn btn-primary" %>
   </div>
 <% end %>
