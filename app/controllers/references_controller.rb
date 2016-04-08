@@ -29,9 +29,10 @@ class ReferencesController < ApplicationController
 
     respond_to do |format|
       if @reference.save
-        format.html { redirect_to @reference, notice: 'Reference was successfully created.' }
+        format.html { redirect_to @reference.referencelist, notice: 'Reference was successfully created.' }
         format.json { render :show, status: :created, location: @reference }
       else
+        @referencelists = Referencelist.all
         format.html { render :new }
         format.json { render json: @reference.errors, status: :unprocessable_entity }
       end
