@@ -1,8 +1,5 @@
-<p id="notice"><%= notice %></p>
-<p>
-  <h2>Name: <%= @referencelist.name %></h2>
+<h2>Name: <%= @referencelist.name %></h2>
 
-</p>
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -40,4 +37,4 @@
 <%# link_to 'Edit', edit_referencelist_path(@referencelist), class:"btn btn-primary" %>
 <%= link_to 'Back', referencelists_path, class:"btn btn-primary" %>
 <%= link_to 'Bibtex', bibtex_referencelist_path, class:"btn btn-primary" %>
-<%= link_to 'Add Reference', new_reference_path, class:"btn btn-primary" %>
+<%= link_to 'Add book', new_referencelist_reference_path(referencelist_id: @referencelist.id), class:"btn btn-primary" %>

@@ -1,5 +1,6 @@
 class Reference < ActiveRecord::Base
   belongs_to :referencelist
 
-  validates :author, :title, :publisher, :year,  presence: true
+  validates :author, :title, :publisher, :year, presence: true
+  validates :year, :volume, :month, :series, numericality: { allow_blank: true }
 end

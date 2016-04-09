@@ -1,20 +1,5 @@
 <%= form_for(@reference) do |f| %>
-  <% if @reference.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@reference.errors.count, "error") %> prohibited this reference from being saved:</h2>
-
-      <ul>
-      <% @reference.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field hidden">
-    <%= f.label :referencelist_id %><br>
-    <%= f.select :referencelist_id, options_from_collection_for_select(@referencelists, :id, :to_s) %>
-  </div>
+  <%= f.hidden_field :referencelist_id, value: @reference.referencelist_id %>
   <div class="field">
     <%= f.label :year %><br>
     <%= f.number_field :year %>
@@ -60,6 +45,7 @@
     <%= f.text_field :note %>
   </div>
   <div class="actions">
+    <br />
     <%= f.submit class:"btn btn-primary" %>
   </div>
 <% end %>

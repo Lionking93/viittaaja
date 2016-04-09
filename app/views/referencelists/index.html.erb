@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Referencelists</h1>
 
 <table class="table">
@@ -17,12 +15,10 @@
         <td><%= referencelist.name %></td>
         <td><%= link_to 'Show', referencelist, class:"btn btn-primary" %>
         <%# link_to 'Edit', edit_referencelist_path(referencelist), class:"btn btn-primary" %>
-        <%= link_to 'Destroy', referencelist, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary" %></td>
+        <%= link_to 'Delete', referencelist, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Referencelist', new_referencelist_path %>
+<%= link_to 'New Referencelist', new_referencelist_path, class:"btn btn-primary" %>
