@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 RSpec.describe BibtexConverter, type: :lib do
   let(:dummy_class) { Class.new { include BibtexConverter } }
   it "Ää is converted" do

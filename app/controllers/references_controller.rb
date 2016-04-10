@@ -26,7 +26,7 @@ class ReferencesController < ApplicationController
   # POST /references.json
   def create
     @reference = Reference.new(reference_params)
-    
+
     respond_to do |format|
       if @reference.save
         format.html { redirect_to @reference.referencelist, notice: 'Reference was successfully created.' }
