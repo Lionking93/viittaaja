@@ -9,7 +9,7 @@ RSpec.describe BibtexConverter, type: :lib do
 
     conv.fix_special(str)
 
-    str.should eq("\\\"{A}\\\"{a}")
+    expect(str).to eq("\\\"{A}\\\"{a}")
   end
 
   it "Öö is converted" do
@@ -18,7 +18,7 @@ RSpec.describe BibtexConverter, type: :lib do
 
     conv.fix_special(str)
 
-    str.should eq("\\\"{O}\\\"{o}")
+    expect(str).to eq("\\\"{O}\\\"{o}")
   end
 
   it "Åå is converted" do
@@ -27,7 +27,7 @@ RSpec.describe BibtexConverter, type: :lib do
 
     conv.fix_special(str)
 
-    str.should eq("\\AA\\aa")
+    expect(str).to eq("\\AA\\aa")
   end
 
 end
