@@ -11,7 +11,7 @@ describe 'Referencelist' do
     expect(page).to have_content("Referencelist was successfully created.")
     visit referencelists_path
     expect(page).to have_content("tepon lista")
-    expect(page).to have_xpath(".//tr", :count => 2)
+    expect(page).to have_xpath(".//tr", count: 2)
   end
 
   it 'when name is blank, creation fails and does not show up on referencelist page' do
@@ -22,7 +22,7 @@ describe 'Referencelist' do
     click_button 'Create Referencelist'
 
     visit referencelists_path
-    expect(page).to have_xpath(".//tr", :count => 1)
+    expect(page).to have_xpath(".//tr", count: 1)
   end
 
 end
