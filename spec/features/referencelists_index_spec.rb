@@ -4,6 +4,7 @@ describe 'Referencelist' do
 
   it 'when created successfully, appears on the referencelist page' do
     visit referencelists_path
+    save_and_open_page
     click_link "New Referencelist"
     expect(page).to have_content("New Referencelist")
     fill_in 'referencelist_name', with: 'tepon lista'
