@@ -1,5 +1,5 @@
 <%= form_for(@reference) do |f| %>
-  <%= f.hidden_field :referencelist_id, value: @reference.referencelist_id %>
+  <%= f.hidden_field :user_id, value: User.first.id %>
   <div class="field">
     <%= f.label :year %><br>
     <%= f.number_field :year %>

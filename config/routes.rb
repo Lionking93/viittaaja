@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  root 'referencelists#index'
-  resources :referencelists do
-    get 'bibtex', on: :member
-    resources :references, shallow: true
-  end
+  root 'references#index'
+
   resources :users
   resources :references
+
+  get 'bibtex', to: 'bib_tex#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

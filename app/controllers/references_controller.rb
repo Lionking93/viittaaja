@@ -15,7 +15,6 @@ class ReferencesController < ApplicationController
   # GET /references/new
   def new
     @reference = Reference.new
-    @reference.referencelist_id = params[:referencelist_id]
   end
 
   # GET /references/1/edit
@@ -29,10 +28,9 @@ class ReferencesController < ApplicationController
 
     respond_to do |format|
       if @reference.save
-        format.html { redirect_to @reference.referencelist, notice: 'Reference was successfully created.' }
+        format.html { redirect_to :root, notice: 'Reference was successfully created.' }
         format.json { render :show, status: :created, location: @reference }
       else
-        @referencelists = Referencelist.all
         format.html { render :new }
         format.json { render json: @reference.errors, status: :unprocessable_entity }
       end
@@ -44,7 +42,7 @@ class ReferencesController < ApplicationController
   def update
     respond_to do |format|
       if @reference.update(reference_params)
-        format.html { redirect_to @reference, notice: 'Reference was successfully updated.' }
+        format.html { redirect_to references_path, notice: 'Reference was successfully updated.' }
         format.json { render :show, status: :ok, location: @reference }
       else
         format.html { render :edit }
@@ -71,6 +69,6 @@ class ReferencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reference_params
-      params.require(:reference).permit(:referencelist_id, :year, :publisher, :author, :title, :address, :pages, :volume, :edition, :month, :series, :note)
+      params.require(:reference).permit(:user_id, :year, :publisher, :author, :title, :address, :pages, :volume, :edition, :month, :series, :note)
     end
 end

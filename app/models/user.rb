@@ -1,8 +1,6 @@
 class User < ActiveRecord::Base
 
-
-  has_many :references, through: :referencelists
-  has_many :referencelists
+  has_many :references
 
   validates :username, length: { minimum: 3, maximum: 15 }, uniqueness: true
 

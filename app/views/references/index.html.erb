@@ -1,30 +1,25 @@
-<p id="notice"><%= notice %></p>
+<h2>References</h2>
 
-<h1>Listing References</h1>
-
-<table>
+<table class="table table-bordered">
   <thead>
-    <tr>
-      <th>Referencelist</th>
-      <th>Year</th>
-      <th>Publisher</th>
-      <th>Author</th>
-      <th>Title</th>
-      <th>Address</th>
-      <th>Pages</th>
-      <th>Volume</th>
-      <th>Edition</th>
-      <th>Month</th>
-      <th>Series</th>
-      <th>Note</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Year</th>
+    <th>Publisher</th>
+    <th>Author</th>
+    <th>Title</th>
+    <th>Address</th>
+    <th>Pages</th>
+    <th>Volume</th>
+    <th>Edition</th>
+    <th>Month</th>
+    <th>Series</th>
+    <th>Note</th>
+    <th></th>
+  </tr>
   </thead>
-
   <tbody>
-    <% @references.each do |reference| %>
+  <% @references.each do |reference| %>
       <tr>
-        <td><%= reference.referencelist_id %></td>
         <td><%= reference.year %></td>
         <td><%= reference.publisher %></td>
         <td><%= reference.author %></td>
@@ -36,14 +31,11 @@
         <td><%= reference.month %></td>
         <td><%= reference.series %></td>
         <td><%= reference.note %></td>
-        <td><%= link_to 'Show', reference %></td>
-        <td><%= link_to 'Edit', edit_reference_path(reference) %></td>
-        <td><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_reference_path(reference), class:"btn btn-danger" %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Reference', new_reference_path %>
+<%= link_to 'Bibtex', bibtex_path, class:'btn btn-primary' %>
+<%= link_to 'Add book', new_reference_path, class:'btn btn-primary' %>
