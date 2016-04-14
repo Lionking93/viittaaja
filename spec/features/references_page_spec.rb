@@ -26,8 +26,6 @@ describe 'References page' do
 
     click_link "Add book"
 
-    save_and_open_page
-
     fill_in 'reference_year', with: '2000'
     fill_in 'reference_publisher', with: 'Kebab'
     fill_in 'reference_author', with: 'on'

@@ -1,5 +1,9 @@
 <%= form_for(@reference) do |f| %>
-  <%= f.hidden_field :user_id, value: User.first.id %>
+  <% if User.first.nil? %>
+    <%= f.hidden_field :user_id, value: 0 %>
+  <% else %>
+    <%= f.hidden_field :user_id, value: User.first.id %>
+  <% end %>
   <div class="field">
     <%= f.label :year %><br>
     <%= f.number_field :year %>
