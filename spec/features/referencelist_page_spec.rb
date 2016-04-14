@@ -14,8 +14,8 @@ describe 'Referencelist page' do
     @first_reference = find('table tbody').find('tr:nth-child(1)')
     @second_reference = find('table tbody').find('tr:nth-child(2)')
 
-    expect(@first_reference.text).to eq "1990 Suomiboyz Teppo Matti"
-    expect(@second_reference.text).to eq "1990 asd Barack Öbämå USA"
+    expect(@first_reference.text).to eq "1990 Suomiboyz Teppo Matti EditDestroy"
+    expect(@second_reference.text).to eq "1990 asd Barack Öbämå USA EditDestroy"
   end
 
   it 'when a new reference is added, shows it on the page' do
