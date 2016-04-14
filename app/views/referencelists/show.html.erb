@@ -14,6 +14,7 @@
       <th>Month</th>
       <th>Series</th>
       <th>Note</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -30,6 +31,7 @@
         <td><%= reference.month %></td>
         <td><%= reference.series %></td>
         <td><%= reference.note %></td>
+        <td><%= link_to 'Edit', edit_reference_path(reference) %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
