@@ -24,7 +24,7 @@ describe 'References page' do
     expect(page).to have_xpath(".//tr", count: 3)
     expect(page).not_to have_content("2000 Kebab on hyvää")
 
-    click_link "Add book"
+    click_link "Add reference"
 
     fill_in 'reference_year', with: '2000'
     fill_in 'reference_publisher', with: 'Kebab'
