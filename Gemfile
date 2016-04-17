@@ -36,6 +36,7 @@ gem 'bootstrap-sass'
 
 ruby '2.3.0'
 gem 'httparty'
+gem 'jquery-turbolinks'
 
 group :production do
   gem 'pg'
