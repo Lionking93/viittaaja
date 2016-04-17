@@ -1,53 +1,77 @@
 <%= form_for(@reference) do |f| %>
+
+  <div class="field">
+    <select class="reference_type" id="reference_type">
+      <option value="book">Book</option>
+      <option value="article">Article</option>
+      <option value="inproceeding">Inproceeding</option>
+    </select>
+  </div>
   <% if User.first.nil? %>
     <%= f.hidden_field :user_id, value: 0 %>
   <% else %>
     <%= f.hidden_field :user_id, value: User.first.id %>
   <% end %>
-  <div class="field">
+  <div class="field reference_year">
     <%= f.label :year %><br>
     <%= f.number_field :year %>
   </div>
-  <div class="field">
+  <div class="field reference_publisher">
     <%= f.label :publisher %><br>
     <%= f.text_field :publisher %>
   </div>
-  <div class="field">
+  <div class="field reference_author">
     <%= f.label :author %><br>
     <%= f.text_field :author %>
   </div>
-  <div class="field">
+  <div class="field reference_title">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
-  <div class="field">
+  <div class="field reference_booktitle">
+    <%= f.label :booktitle %><br>
+    <%= f.text_field :booktitle %>
+  </div>
+  <div class="field reference_address">
     <%= f.label :address %><br>
     <%= f.text_field :address %>
   </div>
-  <div class="field">
+  <div class="field reference_organization">
+    <%= f.label :organization %><br>
+    <%= f.text_field :organization %>
+  </div>
+  <div class="field reference_pages">
     <%= f.label :pages %><br>
     <%= f.text_field :pages %>
   </div>
-  <div class="field">
+  <div class="field reference_volume">
     <%= f.label :volume %><br>
     <%= f.number_field :volume %>
   </div>
-  <div class="field">
+  <div class="field reference_edition">
     <%= f.label :edition %><br>
     <%= f.text_field :edition %>
   </div>
-  <div class="field">
+  <div class="field reference_number">
+    <%= f.label :number %><br>
+    <%= f.text_field :number %>
+   </div>
+  <div class="field reference_month">
     <%= f.label :month %><br>
     <%= f.number_field :month %>
   </div>
-  <div class="field">
+  <div class="field reference_series">
     <%= f.label :series %><br>
     <%= f.number_field :series %>
   </div>
-  <div class="field">
+  <div class="field reference_note">
     <%= f.label :note %><br>
     <%= f.text_field :note %>
   </div>
+    <div class="field reference_key">
+      <%= f.label :key %><br>
+      <%= f.text_field :key %>
+    </div>
   <div class="actions">
     <br />
     <%= f.submit class:"btn btn-primary" %>

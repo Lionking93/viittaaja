@@ -1,8 +1,14 @@
 <h2>References in BibTex-format</h2>
-
+<textarea readonly id="textfield" rows="20" cols="50">
 <% @bibtex.each do |single_reference| %>
     <% single_reference.each do |single_row| %>
         <%= single_row %><br />
     <% end %>
     <br />
 <% end %>
+</textarea>
+
+<button class="btn" data-clipboard-target="#textfield">Copy to clipboard</button>
+
+
+<script src="assets/clipboard.min.js"></script>
