@@ -1,11 +1,7 @@
 <%= form_for(@reference) do |f| %>
 
   <div class="field">
-    <select class="reference_type" id="reference_type">
-      <option value="book">Book</option>
-      <option value="article">Article</option>
-      <option value="inproceeding">Inproceeding</option>
-    </select>
+    <%= f.select :reference_type, options_for_select([['Book', 'book'], ['Article', 'article'], ['Inproceeding', 'inproceeding']], selected: @reference.reference_type) %>
   </div>
   <% if User.first.nil? %>
     <%= f.hidden_field :user_id, value: 0 %>
@@ -28,9 +24,17 @@
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+  <div class="field reference_journal">
+    <%= f.label :journal %><br>
+    <%= f.text_field :journal %>
+  </div>
   <div class="field reference_booktitle">
     <%= f.label :booktitle %><br>
     <%= f.text_field :booktitle %>
+  </div>
+  <div class="field reference_editor">
+    <%= f.label :editor %><br>
+    <%= f.text_field :editor %>
   </div>
   <div class="field reference_address">
     <%= f.label :address %><br>

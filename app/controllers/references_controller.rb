@@ -25,7 +25,7 @@ class ReferencesController < ApplicationController
   # POST /references.json
   def create
     @reference = Reference.new(reference_params)
-
+    byebug
     respond_to do |format|
       if @reference.save
         format.html { redirect_to :root, notice: 'Reference was successfully created.' }
@@ -69,6 +69,7 @@ class ReferencesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reference_params
-      params.require(:reference).permit(:user_id, :year, :publisher, :author, :title, :address, :pages, :volume, :edition, :month, :series, :note)
+      params.require(:reference).permit(:user_id, :year, :publisher, :author, :journal, :title, :booktitle, :editor, :address, :organization, :pages, :volume,
+       :number, :edition, :month, :series, :note, :reference_type, :key)
     end
 end

@@ -43,6 +43,8 @@ $( window ).load(function(){
         $(".reference_booktitle").show();
         $(".reference_publisher").show();
         $(".reference_pages").show();
+        $(".reference_series").show();
+        $(".reference_volume").show();
         $(".reference_organization").show();
         $(".reference_year").show();
         $(".reference_address").show();
@@ -65,17 +67,17 @@ $( window ).load(function(){
     $( document).hidefields();
     $( document).showBook();
 
-    $( "#reference_type" ).on("change", function() {
+    $( "#reference_reference_type" ).on("change", function() {
 
-        if($("#reference_type").val() == "book"){
+        if($("#reference_reference_type").val() == "book"){
             $( document ).hidefields();
             $( document ).showBook();
         };
-        if($("#reference_type").val() == "inproceeding"){
+        if($("#reference_reference_type").val() == "inproceeding"){
             $( document).hidefields();
             $( document).showInproceeding();
         };
-        if($("#reference_type").val() == "article"){
+        if($("#reference_reference_type").val() == "article"){
             $( document).hidefields();
             $( document).showArticle();
         };
