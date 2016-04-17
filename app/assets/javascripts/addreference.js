@@ -83,14 +83,17 @@ $( window ).load(function(){
         if($("#reference_reference_type").val() == "book"){
             $( document ).hidefields();
             $( document ).showBook();
+            $( "span").hide();
         };
         if($("#reference_reference_type").val() == "inproceeding"){
             $( document).hidefields();
             $( document).showInproceeding();
+            $( "span" ).hide();
         };
         if($("#reference_reference_type").val() == "article"){
             $( document).hidefields();
             $( document).showArticle();
+            $( "span" ).hide();
         };
     });
 });
