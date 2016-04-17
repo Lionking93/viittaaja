@@ -6,6 +6,8 @@
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Viittaaja" %>">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'addreference.js' %>
+    <%= javascript_include_tag 'clipboard.min.js' %>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -17,6 +19,5 @@
        <%= yield %>
     </main>
 
-    <%= javascript_include_tag 'clipboard.min.js' %>
   </body>
 </html>
