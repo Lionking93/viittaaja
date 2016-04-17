@@ -65,7 +65,18 @@ $( window ).load(function(){
         $(".reference_key").show();
     };
     $( document).hidefields();
-    $( document).showBook();
+    if($("#reference_reference_type").val() == "book"){
+        $( document ).hidefields();
+        $( document ).showBook();
+    };
+    if($("#reference_reference_type").val() == "inproceeding"){
+        $( document).hidefields();
+        $( document).showInproceeding();
+    };
+    if($("#reference_reference_type").val() == "article"){
+        $( document).hidefields();
+        $( document).showArticle();
+    };
 
     $( "#reference_reference_type" ).on("change", function() {
 
