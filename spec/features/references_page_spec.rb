@@ -3,15 +3,21 @@ require 'rails_helper'
 describe 'References page' do
 
   it 'lists all current references' do
-    Reference.create year:1990, author:"Teppo", title:"Matti", publisher:"Suomiboyz"
-    Reference.create year:1990, author:"Barack Öbämå", title:"USA", publisher:"asd"
+    Reference.create reference_type:'book', year:1990, author:"Teppo", title:"Matti", publisher:"Suomiboyz"
+    Reference.create reference_type:'article', year:1980, author:"Barack Öbämå", title:"USA", journal:"dsaasd", volume:1
+    Reference.create reference_type:'inproceeding', year:1930, author:"asd", title:"jou", booktitle:"herp"
+
     visit references_path
 
-    @first_reference = find('table tbody').find('tr:nth-child(1)')
-    @second_reference = find('table tbody').find('tr:nth-child(2)')
+    save_and_open_page
 
-    expect(@first_reference.text).to eq "1990 Suomiboyz Teppo Matti EditDestroy"
-    expect(@second_reference.text).to eq "1990 asd Barack Öbämå USA EditDestroy"
+    @book_reference = find_by_id('books').find('tbody').find('tr:nth-child(1)')
+    @article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
+    @inproceeding_reference = find_by_id('inproceedings').find('tbody').find('tr:nth-child(1)')
+
+    expect(@book_reference.text).to eq "1990 Suomiboyz Teppo Matti EditDestroy"
+    expect(@article_reference.text).to eq "1980 dsaasd Barack Öbämå USA 1 EditDestroy"
+    expect(@inproceeding_reference.text).to eq "1930 herp asd jou EditDestroy"
   end
 
   it 'when a new reference is added, shows it on the page' do
