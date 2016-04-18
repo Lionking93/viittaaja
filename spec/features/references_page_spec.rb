@@ -57,5 +57,70 @@ describe 'References page' do
                                   }"
   end
 
+  it 'a new article is added', js: true do
+    visit references_path
+
+    expect(page).to have_xpath(".//tr", count: 3)
+
+    click_link "Add reference"
+
+    select "article", :from => "reference_reference_type"
+
+    fill_in 'reference_year', with: '1995'
+    fill_in 'reference_author', with: 'teppo'
+    fill_in 'reference_title', with: 'titteli'
+    fill_in 'reference_journal', with: 'science'
+    fill_in 'reference_volume', with: '14'
+
+    click_button "Create Reference"
+    expect(page).to have_xpath(".//tr", count: 4)
+
+    expect(page).to have_content("science")
+  end
+
+  it 'a new article is added' do
+    visit references_path
+
+    expect(page).to have_xpath(".//tr", count: 3)
+
+    click_link "Add reference"
+
+    select "Article", :from => "reference_reference_type"
+
+    fill_in 'reference_year', with: '1995'
+    fill_in 'reference_author', with: 'teppo'
+    fill_in 'reference_title', with: 'titteli'
+    fill_in 'reference_journal', with: 'science'
+    fill_in 'reference_volume', with: '14'
+
+    click_button "Create Reference"
+    expect(page).to have_xpath(".//tr", count: 4)
+
+    expect(page).to have_content("science")
+  end
+
+  it 'article is not added with insufficient fields' do
+    visit references_path
+
+    expect(page).to have_xpath(".//tr", count: 3)
+
+    click_link "Add reference"
+
+    select "Article", :from => "reference_reference_type"
+
+    fill_in 'reference_year', with: '1995'
+    fill_in 'reference_author', with: 'teppo'
+    fill_in 'reference_title', with: 'titteli'
+    fill_in 'reference_journal', with: 'science'
+
+    click_button "Create Reference"
+
+    expect(page).to have_content("can't be blank")
+
+    visit references_path
+
+    expect(page).not_to have_content("science")
+  end
+
 end
 
