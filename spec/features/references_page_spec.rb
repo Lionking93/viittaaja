@@ -105,5 +105,51 @@ describe 'References page' do
     expect(page).to have_xpath(".//tr", count: 3)
     expect(page).not_to have_content("science")
   end
+
+  it 'new inproceedings is added' do
+    visit references_path
+
+    expect(page).to have_xpath(".//tr", count: 3)
+
+    click_link "Add reference"
+
+    select "Inproceeding", :from => "reference_reference_type"
+
+    fill_in 'reference_year', with: '1991'
+    fill_in 'reference_author', with: 'world'
+    fill_in 'reference_title', with: 'blue'
+    fill_in 'reference_booktitle', with: 'nature'
+
+    click_button "Create Reference"
+    expect(page).to have_xpath(".//tr", count: 4)
+
+    @inproceedings_reference = find_by_id('inproceedings').find('tbody').find('tr:nth-child(1)')
+
+    expect(@inproceedings_reference.text).to eq "1991 nature world blue EditDestroy"
+  end
+
+  it 'inproceedings is not added with insufficient fields' do
+    visit references_path
+
+    expect(page).to have_xpath(".//tr", count: 3)
+
+    click_link "Add reference"
+
+    select "Article", :from => "reference_reference_type"
+
+
+    fill_in 'reference_year', with: '2066'
+    fill_in 'reference_author', with: 'the future'
+    fill_in 'reference_booktitle', with: 'in the year 2066'
+
+    click_button "Create Reference"
+
+    expect(page).to have_content("can't be blank")
+
+    visit references_path
+    
+    expect(page).to have_xpath(".//tr", count: 3)
+    expect(page).not_to have_content("the future")
+  end
 end
 
