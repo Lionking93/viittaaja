@@ -18,7 +18,7 @@ describe 'References page' do
     expect(@inproceeding_reference.text).to eq "1930 herp asd jou EditDestroy"
   end
 
-  it 'when a new reference is added, shows it on the page' do
+  it 'when a new book is added, shows it on the page' do
     User.create username:"asd"
     Reference.create year:1990, author:"Teppo", title:"Matti", publisher:"Suomiboyz"
     Reference.create year:1990, author:"Barack Öbämå", title:"USA", publisher:"asd"
@@ -57,7 +57,7 @@ describe 'References page' do
                                   }"
   end
 
-  it 'a new article is added' do
+  it 'new article is added' do
     visit references_path
 
     expect(page).to have_xpath(".//tr", count: 3)
@@ -76,6 +76,10 @@ describe 'References page' do
     expect(page).to have_xpath(".//tr", count: 4)
 
     expect(page).to have_content("science")
+
+    @article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
+
+    expect(@article_reference.text).to eq "1995 science teppo titteli 14 EditDestroy"
   end
 
   it 'article is not added with insufficient fields' do
@@ -97,9 +101,9 @@ describe 'References page' do
     expect(page).to have_content("can't be blank")
 
     visit references_path
-
+    
+    expect(page).to have_xpath(".//tr", count: 3)
     expect(page).not_to have_content("science")
   end
-
 end
 
