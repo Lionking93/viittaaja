@@ -9,8 +9,6 @@ describe 'References page' do
 
     visit references_path
 
-    save_and_open_page
-
     @book_reference = find_by_id('books').find('tbody').find('tr:nth-child(1)')
     @article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
     @inproceeding_reference = find_by_id('inproceedings').find('tbody').find('tr:nth-child(1)')
@@ -43,14 +41,15 @@ describe 'References page' do
   end
 
   it 'when bibtex-button is pressed, opens up a page showing references in bibtex format' do
-    Reference.create year:1990, author:"Barack Öbämå", title:"USA", publisher:"asd"
+    Reference.create year:1990, author:"Barack Öbämå", title:"USA", publisher:"asd", reference_type:"book"
 
     visit references_path
 
     click_link "Bibtex"
+    @bibtex_textbox = find('textarea')
 
     expect(page).to have_content "References in BibTex-format"
-    expect(page).to have_content "@Book{1,
+    expect(@bibtex_textbox.text).to have_content "@Book{1,
                                   year = {1990},
                                   publisher = {asd},
                                   author = {Barack \\\"{O}b\\\"{a}m\\aa},
