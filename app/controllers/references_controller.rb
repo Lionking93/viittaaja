@@ -4,7 +4,9 @@ class ReferencesController < ApplicationController
   # GET /references
   # GET /references.json
   def index
-    @references = Reference.all
+    @books = Reference.books
+    @articles = Reference.articles
+    @inproceedings = Reference.inproceedings
   end
 
   # GET /references/1
