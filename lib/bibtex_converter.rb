@@ -14,7 +14,9 @@ module BibtexConverter
   def convert_one(data)
     converted = []
 
-    converted << "@Book{#{data.id},"
+    converted << "@Book{#{data.id}," if data.reference_type == 'book'
+    converted << "@Article{#{data.id}," if data.reference_type == 'article'
+    converted << "@Inproceeding{#{data.id}," if data.reference_type == 'inproceeding'
     converted << "year = {#{data.year}}," unless data.year.nil?
     converted << "publisher = {#{self.fix_special(data.publisher)}}," unless data.publisher.nil? || data.publisher.empty?
     converted << "author = {#{self.fix_special(data.author)}}," unless data.author.nil? || data.author.empty?
@@ -26,6 +28,12 @@ module BibtexConverter
     converted << "month = {#{data.month}}," unless data.month.nil?
     converted << "series = {#{data.series}}," unless data.series.nil?
     converted << "note = {#{self.fix_special(data.note)}}," unless data.note.nil? || data.note.empty?
+    converted << "journal = {#{self.fix_special(data.journal)}}," unless data.journal.nil? || data.journal.empty?
+    converted << "number = {#{data.number}}," unless data.number.nil?
+    converted << "key = {#{self.fix_special(data.key)}}," unless data.key.nil? || data.key.empty?
+    converted << "booktitle {#{self.fix_special(data.booktitle)}}," unless data.booktitle.nil? || data.booktitle.empty?
+    converted << "editor {#{self.fix_special(data.editor)}}," unless data.editor.nil? || data.editor.empty?
+    converted << "organization {#{self.fix_special(data.organization)}}," unless data.organization.nil? || data.organization.empty?
     converted << "}"
 
     converted
