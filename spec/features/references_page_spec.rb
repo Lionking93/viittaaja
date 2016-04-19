@@ -20,12 +20,12 @@ describe 'References page' do
 
   it 'when a new book is added, shows it on the page' do
     User.create username:"asd"
-    Reference.create year:1990, author:"Teppo", title:"Matti", publisher:"Suomiboyz"
-    Reference.create year:1990, author:"Barack Öbämå", title:"USA", publisher:"asd"
+    Reference.create reference_type:'book', year:1990, author:"Teppo", title:"Matti", publisher:"Suomiboyz"
+    Reference.create reference_type:'book', year:1990, author:"Barack Öbämå", title:"USA", publisher:"asd"
 
     visit references_path
 
-    expect(page).to have_xpath(".//tr", count: 3)
+    expect(page).to have_xpath(".//tr", count: 5)
     expect(page).not_to have_content("2000 Kebab on hyvää")
 
     click_link "Add reference"
@@ -35,7 +35,7 @@ describe 'References page' do
     fill_in 'reference_author', with: 'on'
     fill_in 'reference_title', with: 'hyvää'
     click_button "Create Reference"
-    expect(page).to have_xpath(".//tr", count: 4)
+    expect(page).to have_xpath(".//tr", count: 6)
 
     expect(page).to have_content("2000 Kebab on hyvää")
   end
@@ -64,7 +64,7 @@ describe 'References page' do
 
     click_link "Add reference"
 
-    select "Article", :from => "reference_reference_type"
+    select "Article", from: "reference_reference_type"
 
     fill_in 'reference_year', with: '1995'
     fill_in 'reference_author', with: 'teppo'
@@ -89,7 +89,7 @@ describe 'References page' do
 
     click_link "Add reference"
 
-    select "Article", :from => "reference_reference_type"
+    select "Article", from: "reference_reference_type"
 
     fill_in 'reference_year', with: '1995'
     fill_in 'reference_author', with: 'teppo'
@@ -113,7 +113,7 @@ describe 'References page' do
 
     click_link "Add reference"
 
-    select "Inproceeding", :from => "reference_reference_type"
+    select "Inproceeding", from: "reference_reference_type"
 
     fill_in 'reference_year', with: '1991'
     fill_in 'reference_author', with: 'world'
@@ -135,7 +135,7 @@ describe 'References page' do
 
     click_link "Add reference"
 
-    select "Article", :from => "reference_reference_type"
+    select "Article", from: "reference_reference_type"
 
 
     fill_in 'reference_year', with: '2066'
