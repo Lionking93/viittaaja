@@ -151,5 +151,67 @@ describe 'References page' do
     expect(page).to have_xpath(".//tr", count: 3)
     expect(page).not_to have_content("the future")
   end
+
+
+  it 'editing makes permanent changes' do
+
+    Reference.create reference_type:'article', year:1980, author:"Barack Öbämå", title:"USA", journal:"dsaasd", volume:1
+
+    visit references_path
+
+    @article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
+    expect(page).to have_xpath(".//tr", count: 4)
+
+    click_link "Edit"
+
+    fill_in 'reference_year', with: '1611'
+    click_button "Update Reference"
+
+    expect(page).to have_xpath(".//tr", count: 4)
+    expect(page).to have_content("Reference was successfully updated.")
+
+    @article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
+    expect(@article_reference.text).to eq "1611 dsaasd Barack Öbämå USA 1 EditDestroy"
+  end
+
+
+  it 'editing to remove required fields gives an error' do
+
+    Reference.create reference_type:'article', year:1980, author:"Barack Öbämå", title:"USA", journal:"dsaasd", volume:1
+
+    visit references_path
+
+    @article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
+    expect(page).to have_xpath(".//tr", count: 4)
+
+    click_link "Edit"
+
+    fill_in 'reference_year', with: ''
+    click_button "Update Reference"
+
+    expect(page).not_to have_content("Reference was successfully updated.")
+
+    expect(page).to have_content("can't be blank")
+  end
+=begin
+  it 'deleting a reference removes it permanently' do
+
+    Reference.create reference_type:'article', year:1980, author:"Barack Öbämå", title:"USA", journal:"dsaasd", volume:1
+
+    visit references_path
+
+    @article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
+    expect(page).to have_xpath(".//tr", count: 4)
+
+    click_link "Destroy"
+    
+    //javascript button push here
+
+    expect(page).not_to have_content("USA")
+    expect(page).to have_xpath(".//tr", count: 3)
+    expect(page).to have_content("Reference was successfully destroyed.")
+  end
+=end
 end
+
 
