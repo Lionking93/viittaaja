@@ -193,25 +193,39 @@ describe 'References page' do
 
     expect(page).to have_content("can't be blank")
   end
-=begin
-  it 'deleting a reference removes it permanently' do
 
-    Reference.create reference_type:'article', year:1980, author:"Barack Öbämå", title:"USA", journal:"dsaasd", volume:1
+  it 'deleting a reference removes it permanently', js: true do
+    WebMock.disable_net_connect!(allow_localhost:true)
 
     visit references_path
+
+    click_link "Add reference"
+
+    select "Article", from: "reference_reference_type"
+
+    fill_in 'reference_year', with: '1995'
+    fill_in 'reference_author', with: 'teppo'
+    fill_in 'reference_title', with: 'titteli'
+    fill_in 'reference_journal', with: 'science'
+    fill_in 'reference_volume', with: '14'
+
+    click_button "Create Reference"
 
     @article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
     expect(page).to have_xpath(".//tr", count: 4)
 
     click_link "Destroy"
-    
-    //javascript button push here
+
+    page.driver.browser.switch_to.alert.accept
 
     expect(page).not_to have_content("USA")
     expect(page).to have_xpath(".//tr", count: 3)
     expect(page).to have_content("Reference was successfully destroyed.")
   end
-=end
+
+  after :each do
+    DatabaseCleaner.clean
+  end
 end
 
 

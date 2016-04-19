@@ -71,4 +71,6 @@ group :test do
   gem 'simplecov', require: false
   gem 'rspec-its'
   gem 'webmock'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
