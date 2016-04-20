@@ -36,9 +36,11 @@ class Reference < ActiveRecord::Base
 
   private
   def author_xor_editor
+    if reference_type=='book'
       unless author.blank? ^ editor.blank?
         errors.add(:author, "or editor must be specified, but not both")
         errors.add(:editor, "or author must be specified, but not both")
       end
     end
+  end
 end
