@@ -1,7 +1,8 @@
 class Reference < ActiveRecord::Base
   belongs_to :user
 
-  validates :author, :title, :publisher, :year, presence: true, if: "reference_type=='book'"
+  validates :title, :publisher, :year, presence: true, if: "reference_type=='book'"
+  validate :author_xor_editor
   validate :drop_unnecessary_fields
   validates :author, :title, :journal, :year, :volume, presence: true, if: "reference_type=='article'"
   validates :author, :title, :booktitle, :year, presence: true, if: "reference_type=='inproceeding'"
@@ -11,6 +12,7 @@ class Reference < ActiveRecord::Base
   scope :articles, -> { where reference_type: 'article' }
   scope :inproceedings, -> { where reference_type: 'inproceeding' }
 
+  private
   def drop_unnecessary_fields
   	if self.reference_type=='book'
   		self.journal = ''
@@ -31,4 +33,12 @@ class Reference < ActiveRecord::Base
   		self.journal = ''
   	end
   end
+
+  private
+  def author_xor_editor
+      unless author.blank? ^ editor.blank?
+        errors.add(:author, "or editor must be specified, but not both")
+        errors.add(:editor, "or author must be specified, but not both")
+      end
+    end
 end
