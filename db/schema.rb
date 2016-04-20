@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418122203) do
+ActiveRecord::Schema.define(version: 20160420193927) do
 
   create_table "referencelists", force: :cascade do |t|
     t.integer  "user_id"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20160418122203) do
     t.string   "pages"
     t.integer  "volume"
     t.string   "edition"
-    t.integer  "month"
+    t.string   "month"
     t.integer  "series"
     t.string   "note"
     t.datetime "created_at",     null: false

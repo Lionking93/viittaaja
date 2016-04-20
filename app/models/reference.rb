@@ -6,7 +6,7 @@ class Reference < ActiveRecord::Base
   validate :drop_unnecessary_fields
   validates :author, :title, :journal, :year, :volume, presence: true, if: "reference_type=='article'"
   validates :author, :title, :booktitle, :year, presence: true, if: "reference_type=='inproceeding'"
-  validates :year, :volume, :month, :series, numericality: { allow_blank: true }
+  validates :year, :volume, :series, numericality: { allow_blank: true }
 
 	scope :books, -> { where reference_type: 'book' }
   scope :articles, -> { where reference_type: 'article' }
