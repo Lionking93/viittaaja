@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :users
   resources :references
 
+  get 'ngreferencelist', to:'references#nglist'
+
   get 'bibtex', to: 'bib_tex#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

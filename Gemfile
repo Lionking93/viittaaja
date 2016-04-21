@@ -51,7 +51,6 @@ group :development, :test do
   gem 'sqlite3'
   gem 'travis'
   gem 'cucumber-rails', :require => false
-  gem 'database_cleaner'
 end
 
 group :development do

@@ -1,0 +1,77 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
+<script>
+  var myApp = angular.module('myApp', []);
+
+  myApp.controller("ReferencesController", function ($scope, $http) {
+    $http.get('references.json').success( function(data, status, headers, config) {
+      $scope.references = data;
+    });
+
+    $scope.order = 'reference_type';
+
+    $scope.sort_by = function (order){
+      $scope.order = order;
+      console.log(order);
+    }
+
+    var articles = [];
+    var books = [];
+    var inproceedings = [];
+    console.log($scope.references);
+
+//    angular.forEach($scope.references, function (value, key){
+//      if(this.reference_type == "article"){
+//        articles.push(value);
+//      }
+//      if(this.reference_type == "book"){
+//        books.push(value);
+//      }
+//      if(this.reference_type == "inproceeding"){
+//        inproceedings.push(value);
+//      }
+//    });
+
+//    $scope.articles = articles;
+//    $scope.books = books;
+//    $scope.inproceedings = inproceedings;
+
+
+  });
+</script>
+
+<h2>References</h2>
+
+<div ng-app="myApp" ng-controller="ReferencesController">
+
+  search:  <input ng-model="searchText">
+
+<table class="table table-hover">
+  <thead>
+    <th> <a ng-click="sort_by('reference_type')">Type</a> </th>
+    <th> <a ng-click="sort_by('year')">year</a> </th>
+    <th> <a ng-click="sort_by('publisher')">publisher</a> </th>
+    <th> <a ng-click="sort_by('author')">author</a> </th>
+  </thead>
+  <th id="par" colspan="5" scope="colgroup">Article</th>
+  <tr ng-repeat="reference in references| orderBy:order | filter:searchText">
+
+    <td>{{reference.reference_type}}</td>
+    <td>{{reference.year}}</td>
+    <td>{{reference.publisher}}</td>
+    <td>{{reference.author}}</td>
+  </tr>
+  <!--<th id="par" colspan="5" scope="colgroup">Book</th>-->
+  <!--<tr ng-repeat="article in articles| orderBy:order | filter:searchText">-->
+    <!--<td>{{book.year}}</td>-->
+    <!--<td>{{book.publisher}}</td>-->
+    <!--<td>{{book.author}}</td>-->
+  <!--</tr>-->
+  <!--<th id="par" colspan="5" scope="colgroup">Inproceedings</th>-->
+  <!--<tr ng-repeat="inproceeding in inproceedings| orderBy:order | filter:searchText">-->
+    <!--<td>{{inproceeding.year}}</td>-->
+    <!--<td>{{inproceeding.publisher}}</td>-->
+    <!--<td>{{inproceeding.author}}</td>-->
+  <!--</tr>-->
+</table>
+
+</div>

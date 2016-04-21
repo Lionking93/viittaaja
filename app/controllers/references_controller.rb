@@ -7,11 +7,15 @@ class ReferencesController < ApplicationController
     @books = Reference.books
     @articles = Reference.articles
     @inproceedings = Reference.inproceedings
+    @references = Reference.all
   end
 
   # GET /references/1
   # GET /references/1.json
   def show
+  end
+
+  def nglist
   end
 
   # GET /references/new
