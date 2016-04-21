@@ -31,9 +31,9 @@ module BibtexConverter
     converted << "journal = {#{self.fix_special(data.journal)}}," unless data.journal.nil? || data.journal.empty?
     converted << "number = {#{data.number}}," unless data.number.nil?
     converted << "key = {#{self.fix_special(data.key)}}," unless data.key.nil? || data.key.empty?
-    converted << "booktitle {#{self.fix_special(data.booktitle)}}," unless data.booktitle.nil? || data.booktitle.empty?
-    converted << "editor {#{self.fix_special(data.editor)}}," unless data.editor.nil? || data.editor.empty?
-    converted << "organization {#{self.fix_special(data.organization)}}," unless data.organization.nil? || data.organization.empty?
+    converted << "booktitle = {#{self.fix_special(data.booktitle)}}," unless data.booktitle.nil? || data.booktitle.empty?
+    converted << "editor = {#{self.fix_special(data.editor)}}," unless data.editor.nil? || data.editor.empty?
+    converted << "organization = {#{self.fix_special(data.organization)}}," unless data.organization.nil? || data.organization.empty?
     converted << "}"
 
     converted
