@@ -23,9 +23,7 @@ class Reference < ActiveRecord::Base
   	end
   	if self.reference_type=='article'
   		self.editor = ''
-  		self.publisher = ''
   		self.series = ''
-  		self.address = ''
   		self.edition = ''
   	end
   	if self.reference_type=='inproceeding'

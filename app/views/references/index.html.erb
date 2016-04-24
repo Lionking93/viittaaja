@@ -56,6 +56,8 @@
     <th>Month</th>
     <th>Note</th>
     <th>Key</th>
+    <th>Address</th>
+    <th>Publisher</th>
     <th>Actions</th>
   </tr>
   </thead>
@@ -72,6 +74,8 @@
         <td><%= reference.month %></td>
         <td><%= reference.note %></td>
         <td><%= reference.key %></td>
+        <td><%= reference.address %></td>
+        <td><%= reference.publisher %></td>
         <td><%= link_to 'Edit', edit_reference_path(reference), 'data-no-turbolink' => true, class:"btn btn-danger" %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
       </tr>
   <% end %>

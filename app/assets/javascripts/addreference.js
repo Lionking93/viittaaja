@@ -63,6 +63,8 @@ $( window ).load(function(){
         $(".reference_month").show();
         $(".reference_note").show();
         $(".reference_key").show();
+        $(".reference_address").show();
+        $(".reference_publisher").show();
     };
     $( document).hidefields();
     if($("#reference_reference_type").val() == "book"){
