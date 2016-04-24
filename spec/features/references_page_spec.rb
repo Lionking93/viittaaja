@@ -222,10 +222,6 @@ describe 'References page' do
     expect(page).to have_xpath(".//tr", count: 3)
     expect(page).to have_content("Reference was successfully destroyed.")
   end
-
-  after :each do
-    DatabaseCleaner.clean
-  end
 end
 
 

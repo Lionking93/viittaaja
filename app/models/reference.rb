@@ -13,6 +13,22 @@ class Reference < ActiveRecord::Base
   scope :articles, -> { where reference_type: 'article' }
   scope :inproceedings, -> { where reference_type: 'inproceeding' }
 
+
+
+  def generate_citation_key(addition = '')
+    key = "#{self.creator[0,2].downcase}#{self.year}#{addition}"
+
+    nextChar = addition.empty? ? 'a' : (addition.ord + 1).chr
+    key = self.generate_citation_key(nextChar) if Reference.where(citation_key:key).any?
+
+    key
+  end
+
+  def creator
+    return editor if author.nil? or author.empty?
+    author
+  end
+
   private
   def drop_unnecessary_fields
   	if self.reference_type=='book'

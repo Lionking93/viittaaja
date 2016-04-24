@@ -5,6 +5,7 @@
 <table id="books" class="table table-bordered">
   <thead>
   <tr>
+    <th>Citation key</th>
     <th>Year</th>
     <th>Publisher</th>
     <th>Author</th>
@@ -23,6 +24,7 @@
   <tbody>
   <% @books.each do |reference| %>
       <tr>
+        <td><%= reference.citation_key %></td>
         <td><%= reference.year %></td>
         <td><%= reference.publisher %></td>
         <td><%= reference.author %></td>
@@ -46,6 +48,7 @@
 <table id="articles" class="table table-bordered">
   <thead>
   <tr>
+    <th>Citation key</th>
     <th>Year</th>
     <th>Journal</th>
     <th>Author</th>
@@ -64,6 +67,7 @@
   <tbody>
   <% @articles.each do |reference| %>
       <tr>
+        <td><%= reference.citation_key %></td>
         <td><%= reference.year %></td>
         <td><%= reference.journal %></td>
         <td><%= reference.author %></td>
@@ -88,6 +92,7 @@
 <table id="inproceedings" class="table table-bordered">
   <thead>
   <tr>
+    <th>Citation key</th>
     <th>Year</th>
     <th>Booktitle</th>
     <th>Author</th>
@@ -108,6 +113,7 @@
   <tbody>
   <% @inproceedings.each do |reference| %>
       <tr>
+        <td><%= reference.citation_key %></td>
         <td><%= reference.year %></td>
         <td><%= reference.booktitle %></td>
         <td><%= reference.author %></td>

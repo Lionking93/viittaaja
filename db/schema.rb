@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424094816) do
+ActiveRecord::Schema.define(version: 20160424140654) do
 
   create_table "referencelists", force: :cascade do |t|
     t.integer  "user_id"
@@ -43,15 +43,10 @@ ActiveRecord::Schema.define(version: 20160424094816) do
     t.integer  "number"
     t.string   "journal"
     t.string   "reference_type"
+    t.string   "citation_key"
   end
 
   add_index "references", ["user_id"], name: "index_references_on_user_id"
-
-  create_table "tags", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "references_tags", id: false, force: :cascade do |t|
     t.integer "reference_id"
@@ -60,6 +55,12 @@ ActiveRecord::Schema.define(version: 20160424094816) do
 
   add_index "references_tags", ["reference_id"], name: "index_references_tags_on_reference_id"
   add_index "references_tags", ["tag_id"], name: "index_references_tags_on_tag_id"
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
