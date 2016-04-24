@@ -14,9 +14,9 @@ module BibtexConverter
   def convert_one(data)
     converted = []
 
-    converted << "@Book{#{data.id}," if data.reference_type == 'book'
-    converted << "@Article{#{data.id}," if data.reference_type == 'article'
-    converted << "@Inproceedings{#{data.id}," if data.reference_type == 'inproceeding'
+    converted << "@Book{#{data.citation_key}," if data.reference_type == 'book'
+    converted << "@Article{#{data.citation_key}," if data.reference_type == 'article'
+    converted << "@Inproceedings{#{data.citation_key}," if data.reference_type == 'inproceeding'
     converted << "    year = {#{data.year}}," unless data.year.nil?
     converted << "    publisher = {#{self.fix_special(data.publisher)}}," unless data.publisher.nil? || data.publisher.empty?
     converted << "    author = {#{self.fix_special(data.author)}}," unless data.author.nil? || data.author.empty?

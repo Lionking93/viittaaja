@@ -41,7 +41,8 @@ describe 'References page' do
   end
 
   it 'when bibtex-button is pressed, opens up a page showing references in bibtex format' do
-    Reference.create year:1990, author:"Barack Öbämå", title:"USA", publisher:"asd", reference_type:"book"
+    ref = Reference.create year:1990, author:"Barack Öbämå", title:"USA", publisher:"asd", reference_type:"book"
+    ref.update_attribute(:citation_key, ref.generate_citation_key)
 
     visit references_path
 
@@ -49,7 +50,7 @@ describe 'References page' do
     @bibtex_textbox = find('textarea')
 
     expect(page).to have_content "References in BibTex-format"
-    expect(@bibtex_textbox.text).to have_content "@Book{1,
+    expect(@bibtex_textbox.text).to have_content "@Book{ba1990,
                                   year = {1990},
                                   publisher = {asd},
                                   author = {Barack \\\"{O}b\\\"{a}m\\aa},
