@@ -79,7 +79,7 @@ describe 'References page' do
 
     @article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
 
-    expect(@article_reference.text).to eq "1995 science teppo titteli 14 EditDestroy"
+    expect(@article_reference.text).to eq "te1995 1995 science teppo titteli 14 EditDestroy"
   end
 
   it 'article is not added with insufficient fields' do
@@ -125,7 +125,7 @@ describe 'References page' do
 
     @inproceedings_reference = find_by_id('inproceedings').find('tbody').find('tr:nth-child(1)')
 
-    expect(@inproceedings_reference.text).to eq "1991 nature world blue EditDestroy"
+    expect(@inproceedings_reference.text).to eq "wo1991 1991 nature world blue EditDestroy"
   end
 
   it 'inproceedings is not added with insufficient fields' do

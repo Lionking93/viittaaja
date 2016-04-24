@@ -34,6 +34,7 @@ class ReferencesController < ApplicationController
     
     respond_to do |format|
       if @reference.save
+        @reference.update_attribute(:citation_key, @reference.generate_citation_key)
         format.html { redirect_to :root, notice: 'Reference was successfully created.' }
         format.json { render :show, status: :created, location: @reference }
       else
