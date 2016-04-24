@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tags
   root 'references#index'
 
   resources :users

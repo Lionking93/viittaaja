@@ -1,5 +1,6 @@
 class Reference < ActiveRecord::Base
   belongs_to :user
+  has_and_belongs_to_many :tags
 
   validates :title, :publisher, :year, presence: true, if: "reference_type=='book'"
   validate :author_xor_editor
