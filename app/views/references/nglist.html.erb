@@ -47,18 +47,44 @@
 
 <table class="table table-hover">
   <thead>
+    <th> <a ng-click="sort_by('citation_key')">Citation key</a> </th>
     <th> <a ng-click="sort_by('reference_type')">Type</a> </th>
-    <th> <a ng-click="sort_by('year')">year</a> </th>
-    <th> <a ng-click="sort_by('publisher')">publisher</a> </th>
-    <th> <a ng-click="sort_by('author')">author</a> </th>
+    <th> <a ng-click="sort_by('year')">Year</a> </th>
+    <th> <a ng-click="sort_by('publisher')">Publisher</a> </th>
+    <th> <a ng-click="sort_by('journal')">Journal</a></th>
+    <th> <a ng-click="sort_by('author')">Author</a> </th>
+    <th> <a ng-click="sort_by('editor')">Editor</a> </th>
+    <th> <a ng-click="sort_by('title')">Title</a> </th>
+    <th> <a ng-click="sort_by('bookttitle')">Book title</a> </th>
+    <th> <a ng-click="sort_by('address')">Address</a> </th>
+    <th> <a ng-click="sort_by('pages')">Pages</a> </th>
+    <th> <a ng-click="sort_by('volume')">Volume</a> </th>
+    <th> <a ng-click="sort_by('edition')">Edition</a> </th>
+    <th> <a ng-click="sort_by('organization')">Organization</a> </th>
+    <th> <a ng-click="sort_by('key')">Key</a> </th>
+    <th> <a ng-click="sort_by('month')">Month</a> </th>
+    <th> <a ng-click="sort_by('series')">Series</a> </th>
+    <th> <a ng-click="sort_by('note')">Note</a> </th>
   </thead>
-  <th id="par" colspan="5" scope="colgroup">Article</th>
   <tr ng-repeat="reference in references| orderBy:order | filter:searchText">
 
     <td>{{reference.reference_type}}</td>
     <td>{{reference.year}}</td>
     <td>{{reference.publisher}}</td>
+    <td>{{reference.journal}}</td>
     <td>{{reference.author}}</td>
+    <td>{{reference.editor}}</td>
+    <td>{{reference.title}}</td>
+    <td>{{reference.booktitle}}</td>
+    <td>{{reference.address}}</td>
+    <td>{{reference.pages}}</td>
+    <td>{{reference.volume}}</td>
+    <td>{{reference.edition}}</td>
+    <td>{{reference.organization}}</td>
+    <td>{{reference.key}}</td>
+    <td>{{reference.month}}</td>
+    <td>{{reference.series}}</td>
+    <td>{{reference.note}}</td>
   </tr>
   <!--<th id="par" colspan="5" scope="colgroup">Book</th>-->
   <!--<tr ng-repeat="article in articles| orderBy:order | filter:searchText">-->
@@ -75,3 +101,7 @@
 </table>
 
 </div>
+
+
+<%= link_to 'Bibtex', bibtex_path, class:'btn btn-primary' %>
+<%= link_to 'Add reference', new_reference_path, 'data-no-turbolink' => true, class:'btn btn-primary' %>
