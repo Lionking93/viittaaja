@@ -43,49 +43,50 @@
 
 <div ng-app="myApp" ng-controller="ReferencesController">
 
-  search:  <input ng-model="searchText">
+  search:  <input ng-model="searchText"> <button id="showOptional">Show more</button>
 
 <table class="table table-hover">
   <thead>
     <th> <a ng-click="sort_by('citation_key')">Citation key</a> </th>
     <th> <a ng-click="sort_by('reference_type')">Type</a> </th>
     <th> <a ng-click="sort_by('year')">Year</a> </th>
-    <th> <a ng-click="sort_by('publisher')">Publisher</a> </th>
-    <th> <a ng-click="sort_by('journal')">Journal</a></th>
-    <th> <a ng-click="sort_by('author')">Author</a> </th>
-    <th> <a ng-click="sort_by('editor')">Editor</a> </th>
+    <th class="optional"> <a ng-click="sort_by('publisher')">Publisher</a> </th>
+    <th class="optional"> <a ng-click="sort_by('journal')">Journal</a></th>
+    <th class="optional"> <a ng-click="sort_by('author')">Author</a> </th>
+    <th class="optional"> <a ng-click="sort_by('editor')">Editor</a> </th>
     <th> <a ng-click="sort_by('title')">Title</a> </th>
     <th> <a ng-click="sort_by('bookttitle')">Book title</a> </th>
-    <th> <a ng-click="sort_by('address')">Address</a> </th>
-    <th> <a ng-click="sort_by('pages')">Pages</a> </th>
-    <th> <a ng-click="sort_by('volume')">Volume</a> </th>
-    <th> <a ng-click="sort_by('edition')">Edition</a> </th>
-    <th> <a ng-click="sort_by('organization')">Organization</a> </th>
-    <th> <a ng-click="sort_by('key')">Key</a> </th>
-    <th> <a ng-click="sort_by('month')">Month</a> </th>
-    <th> <a ng-click="sort_by('series')">Series</a> </th>
-    <th> <a ng-click="sort_by('note')">Note</a> </th>
+    <th class="optional"> <a ng-click="sort_by('address')">Address</a> </th>
+    <th class="optional"> <a ng-click="sort_by('pages')">Pages</a> </th>
+    <th class="optional"> <a ng-click="sort_by('volume')">Volume</a> </th>
+    <th class="optional"> <a ng-click="sort_by('edition')">Edition</a> </th>
+    <th class="optional"> <a ng-click="sort_by('organization')">Organization</a> </th>
+    <th class="optional"> <a ng-click="sort_by('key')">Key</a> </th>
+    <th class="optional"> <a ng-click="sort_by('month')">Month</a> </th>
+    <th class="optional"> <a ng-click="sort_by('series')">Series</a> </th>
+    <th class="optional"> <a ng-click="sort_by('note')">Note</a> </th>
   </thead>
   <tr ng-repeat="reference in references| orderBy:order | filter:searchText">
 
     <td>{{reference.citation_key}}</td>
     <td>{{reference.reference_type}}</td>
     <td>{{reference.year}}</td>
-    <td>{{reference.publisher}}</td>
-    <td>{{reference.journal}}</td>
-    <td>{{reference.author}}</td>
-    <td>{{reference.editor}}</td>
+    <td class="optional">{{reference.publisher}}</td>
+    <td class="optional">{{reference.journal}}</td>
+    <td class="optional">{{reference.author}}</td>
+    <td class="optional">{{reference.editor}}</td>
     <td>{{reference.title}}</td>
     <td>{{reference.booktitle}}</td>
-    <td>{{reference.address}}</td>
-    <td>{{reference.pages}}</td>
-    <td>{{reference.volume}}</td>
-    <td>{{reference.edition}}</td>
-    <td>{{reference.organization}}</td>
-    <td>{{reference.key}}</td>
-    <td>{{reference.month}}</td>
-    <td>{{reference.series}}</td>
-    <td>{{reference.note}}</td>
+    <td class="optional">{{reference.address}}</td>
+    <td class="optional">{{reference.pages}}</td>
+    <td class="optional">{{reference.volume}}</td>
+    <td class="optional">{{reference.edition}}</td>
+    <td class="optional">{{reference.organization}}</td>
+    <td class="optional">{{reference.key}}</td>
+    <td class="optional">{{reference.month}}</td>
+    <td class="optional">{{reference.series}}</td>
+    <td class="optional">{{reference.note}}</td>
+    <td><a data-method="delete" href="references/{{reference.id}}"><button class="btn btn-danger">remove</button></a><a href="references/{{reference.id}}/edit"><button class="btn">edit</button></a></td>
   </tr>
   <!--<th id="par" colspan="5" scope="colgroup">Book</th>-->
   <!--<tr ng-repeat="article in articles| orderBy:order | filter:searchText">-->
