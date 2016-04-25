@@ -68,6 +68,7 @@
   </thead>
   <tr ng-repeat="reference in references| orderBy:order | filter:searchText">
 
+    <td>{{reference.citation_key}}</td>
     <td>{{reference.reference_type}}</td>
     <td>{{reference.year}}</td>
     <td>{{reference.publisher}}</td>
