@@ -72,10 +72,21 @@
     <%= f.label :note %><br>
     <%= f.text_field :note %>
   </div>
-    <div class="field reference_key">
-      <%= f.label :key %><br>
-      <%= f.text_field :key %>
-    </div>
+  <div class="field reference_key">
+    <%= f.label :key %><br>
+    <%= f.text_field :key %>
+  </div>
+  <div class="field reference_tags">
+    <%= f.label :tags %><br>
+    <% if !@reference.nil? %>
+      <%= text_area_tag(:tag_field, @reference_tags, size: "20x5") %>
+    <% else %>
+      <%= text_area_tag(:tag_field, size: "20x5") %>
+    <% end %>
+    <% if @tags.any? %>
+      <%= f.select :tags, options_from_collection_for_select(@tags, :id, :name) %>
+    <% end %>
+  </div>
   <div class="actions">
     <br />
     <%= link_to 'Back', references_path, class:"btn btn-primary" %> <%= f.submit class:"btn btn-primary" %>

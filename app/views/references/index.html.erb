@@ -18,6 +18,7 @@
     <th>Month</th>
     <th>Series</th>
     <th>Note</th>
+    <th>Tags</th>
     <th>Actions</th>
   </tr>
   </thead>
@@ -37,6 +38,11 @@
         <td><%= reference.month %></td>
         <td><%= reference.series %></td>
         <td><%= reference.note %></td>
+        <td>
+          <% reference.tags.each do |t| %>
+            <%= t.name %>
+          <% end %>
+        </td>
         <td><%= link_to 'Edit', edit_reference_path(reference), 'data-no-turbolink' => true, class:"btn btn-danger" %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
       </tr>
   <% end %>
@@ -61,6 +67,7 @@
     <th>Key</th>
     <th>Address</th>
     <th>Publisher</th>
+    <th>Tags</th>
     <th>Actions</th>
   </tr>
   </thead>
@@ -80,6 +87,11 @@
         <td><%= reference.key %></td>
         <td><%= reference.address %></td>
         <td><%= reference.publisher %></td>
+        <td>
+          <% reference.tags.each do |t| %>
+            <%= t.name %>
+          <% end %>
+        </td>
         <td><%= link_to 'Edit', edit_reference_path(reference), 'data-no-turbolink' => true, class:"btn btn-danger" %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
       </tr>
   <% end %>
@@ -107,6 +119,7 @@
     <th>Publisher</th>
     <th>Note</th>
     <th>Key</th>
+    <th>Tags</th>
     <th>Actions</th>
   </tr>
   </thead>
@@ -128,6 +141,11 @@
         <td><%= reference.publisher %></td>
         <td><%= reference.note %></td>
         <td><%= reference.key %></td>
+        <td>
+          <% reference.tags.each do |t| %>
+            <%= t.name %>
+          <% end %>
+        </td>
         <td><%= link_to 'Edit', edit_reference_path(reference), 'data-no-turbolink' => true, class:"btn btn-danger" %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
       </tr>
   <% end %>

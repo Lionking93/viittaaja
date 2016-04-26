@@ -4,10 +4,10 @@ class ReferencesController < ApplicationController
   # GET /references
   # GET /references.json
   def index
-    @books = Reference.books
-    @articles = Reference.articles
-    @inproceedings = Reference.inproceedings
-    @references = Reference.all
+    @books = Reference.includes(:tags).books
+    @articles = Reference.includes(:tags).articles
+    @inproceedings = Reference.includes(:tags).inproceedings
+    @references = Reference.includes(:tags).all
   end
 
   # GET /references/1
@@ -20,24 +20,28 @@ class ReferencesController < ApplicationController
 
   # GET /references/new
   def new
+    @tags = Tag.all
     @reference = Reference.new
   end
 
   # GET /references/1/edit
   def edit
+    @tags = Tag.all
+    @reference_tags = "" + reference_tags_to_string(@reference)
   end
 
   # POST /references
   # POST /references.json
   def create
     @reference = Reference.new(reference_params)
-    
     respond_to do |format|
       if @reference.save
+        add_tags_to_reference(@reference, params[:tag_field])
         @reference.update_attribute(:citation_key, @reference.generate_citation_key)
         format.html { redirect_to :root, notice: 'Reference was successfully created.' }
         format.json { render :show, status: :created, location: @reference }
       else
+        @tags = Tag.all
         format.html { render :new }
         format.json { render json: @reference.errors, status: :unprocessable_entity }
       end
@@ -52,6 +56,7 @@ class ReferencesController < ApplicationController
         format.html { redirect_to references_path, notice: 'Reference was successfully updated.' }
         format.json { render :show, status: :ok, location: @reference }
       else
+        @tags = Tag.all
         format.html { render :edit }
         format.json { render json: @reference.errors, status: :unprocessable_entity }
       end
@@ -78,5 +83,26 @@ class ReferencesController < ApplicationController
     def reference_params
       params.require(:reference).permit(:user_id, :year, :publisher, :author, :journal, :title, :booktitle, :editor, :address, :organization, :pages, :volume,
        :number, :edition, :month, :series, :note, :reference_type, :key)
+    end
+
+    def add_tags_to_reference(reference, tags)
+      new_tags = tags.split
+      new_tags.each do |t|
+        if !Tag.find_by(name: t).nil?
+          if @reference.tags.find_by(name: t).nil?
+            @reference.tags << Tag.find_by(name: t)
+          end 
+        else          
+          @reference.tags.create(name: t) 
+        end
+      end
+    end
+
+    def reference_tags_to_string(reference)
+      tags = ""
+      reference.tags.each do |t|
+        tags += " " + t.name
+      end
+      tags
     end
 end
