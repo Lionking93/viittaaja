@@ -3,6 +3,10 @@ $(document).ready(function() {
 	$("#reference_tags").change(function() {
 		var value = $("#reference_tags").val();
 		var option_text = $("#reference_tags option[value='"+ value +"']").text();
-		$("#tag_field").val($("#tag_field").val() + " " + option_text);
+		if ($("#tag_field").val() === '') {
+			$("#tag_field").val(option_text);
+		} else {
+			$("#tag_field").val($("#tag_field").val() + " " + option_text);
+		}	
 	});
 });

@@ -36,7 +36,7 @@ class ReferencesController < ApplicationController
     @reference = Reference.new(reference_params)
     respond_to do |format|
       if @reference.save
-        add_tags_to_reference(@reference, params[:tag_field])
+        add_reference_tags(@reference, params[:tag_field])
         @reference.update_attribute(:citation_key, @reference.generate_citation_key)
         format.html { redirect_to :root, notice: 'Reference was successfully created.' }
         format.json { render :show, status: :created, location: @reference }
@@ -53,6 +53,7 @@ class ReferencesController < ApplicationController
   def update
     respond_to do |format|
       if @reference.update(reference_params)
+        update_reference_tags(@reference, params[:tag_field])
         format.html { redirect_to references_path, notice: 'Reference was successfully updated.' }
         format.json { render :show, status: :ok, location: @reference }
       else
@@ -85,7 +86,7 @@ class ReferencesController < ApplicationController
        :number, :edition, :month, :series, :note, :reference_type, :key)
     end
 
-    def add_tags_to_reference(reference, tags)
+    def add_reference_tags(reference, tags)
       new_tags = tags.split
       new_tags.each do |t|
         if !Tag.find_by(name: t).nil?
@@ -96,12 +97,31 @@ class ReferencesController < ApplicationController
           @reference.tags.create(name: t) 
         end
       end
+      new_tags
+    end
+
+    def update_reference_tags(reference, tags)
+      update_tags = add_reference_tags(reference, tags)
+      delete_reference_tags(reference, update_tags)
+    end
+
+    def delete_reference_tags(reference, tags)
+      reference.tags.each do |t|
+        if !tags.include? t.name
+          tag = Tag.find_by(name: t.name)
+          reference.tags.delete(tag.id)
+        end
+      end
     end
 
     def reference_tags_to_string(reference)
       tags = ""
       reference.tags.each do |t|
-        tags += " " + t.name
+        if (tags == "") 
+          tags = t.name
+        else 
+          tags += " " + t.name
+        end
       end
       tags
     end
