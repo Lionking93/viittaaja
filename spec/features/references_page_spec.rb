@@ -9,13 +9,13 @@ describe 'References page' do
 
     visit references_path
 
-    @book_reference = find_by_id('books').find('tbody').find('tr:nth-child(1)')
-    @article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
-    @inproceeding_reference = find_by_id('inproceedings').find('tbody').find('tr:nth-child(1)')
+    @book_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(2)')
+    @article_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(4)')
+    @inproceeding_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(6)')
 
-    expect(@book_reference.text).to eq "1990 Suomiboyz Teppo Matti EditDestroy"
-    expect(@article_reference.text).to eq "1980 dsaasd Barack Öbämå USA 1 EditDestroy"
-    expect(@inproceeding_reference.text).to eq "1930 herp asd jou EditDestroy"
+    expect(@book_reference.text).to eq "book 1990 Suomiboyz Teppo Matti EditDestroy"
+    expect(@article_reference.text).to eq "article 1980 dsaasd Barack Öbämå USA 1 EditDestroy"
+    expect(@inproceeding_reference.text).to eq "inproceeding 1930 herp asd jou EditDestroy"
   end
 
   it 'when a new book is added, shows it on the page' do
@@ -78,9 +78,9 @@ describe 'References page' do
 
     expect(page).to have_content("science")
 
-    @article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
+    @article_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(3)')
 
-    expect(@article_reference.text).to eq "te1995 1995 science teppo titteli 14 EditDestroy"
+    expect(@article_reference.text).to eq "article te1995 1995 science teppo titteli 14 EditDestroy"
   end
 
   it 'article is not added with insufficient fields' do
@@ -124,9 +124,9 @@ describe 'References page' do
     click_button "Create Reference"
     expect(page).to have_xpath(".//tr", count: 4)
 
-    @inproceedings_reference = find_by_id('inproceedings').find('tbody').find('tr:nth-child(1)')
+    @inproceedings_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(4)')
 
-    expect(@inproceedings_reference.text).to eq "wo1991 1991 nature world blue EditDestroy"
+    expect(@inproceedings_reference.text).to eq "inproceeding wo1991 1991 nature world blue EditDestroy"
   end
 
   it 'inproceedings is not added with insufficient fields' do
@@ -160,7 +160,7 @@ describe 'References page' do
 
     visit references_path
 
-    @article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
+    @article_reference = find_by_id('references').find('tbody').find('tr:nth-child(1)')
     expect(page).to have_xpath(".//tr", count: 4)
 
     click_link "Edit"
@@ -171,8 +171,8 @@ describe 'References page' do
     expect(page).to have_xpath(".//tr", count: 4)
     expect(page).to have_content("Reference was successfully updated.")
 
-    @article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
-    expect(@article_reference.text).to eq "1611 dsaasd Barack Öbämå USA 1 EditDestroy"
+    @article_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(3)')
+    expect(@article_reference.text).to eq "article 1611 dsaasd Barack Öbämå USA 1 EditDestroy"
   end
 
 
@@ -182,7 +182,7 @@ describe 'References page' do
 
     visit references_path
 
-    @article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
+    @article_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(1)')
     expect(page).to have_xpath(".//tr", count: 4)
 
     click_link "Edit"
@@ -212,7 +212,7 @@ describe 'References page' do
 
     click_button "Create Reference"
 
-    @article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
+    @article_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(1)')
     expect(page).to have_xpath(".//tr", count: 4)
 
     click_link "Destroy"
