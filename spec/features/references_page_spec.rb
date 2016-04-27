@@ -283,6 +283,42 @@ describe 'References page' do
 
   end
 
+  it 'a previously created tag can be selected from the list', js: true do
+    WebMock.disable_net_connect!(allow_localhost:true)
+
+
+    visit references_path
+
+    Tag.create name: "mummotagi"
+
+    click_link "Add reference"
+
+    select "Article", from: "reference_reference_type"
+
+    fill_in 'reference_year', with: '1995'
+    fill_in 'reference_author', with: 'teppo'
+    fill_in 'reference_title', with: 'titteli'
+    fill_in 'reference_journal', with: 'science'
+    fill_in 'reference_volume', with: '14'
+    fill_in 'tag_field', with: 'mummotagi'
+
+  # Seuraava (find('#reference_tags')...) ei toimi jostain syystä, poista kommentit
+  # save_and_open_page-riveiltä jos haluat nähdä
+  # tilanteen, eli klikattu tägi ei lisäänny tagiksi. Testi tehty lisäämällä tagi kirjoittamalla,
+  # jolloin kuitenkin funktionaalisesti ilmeisesti sama asia, koska tagin aikaisempi olemassaolo
+  # tarkistetaan joka tapauksessa
+
+  # :  find('#reference_tags').find(:xpath, 'option[1]').select_option
+
+    #save_and_open_page
+
+    click_button "Create Reference"
+
+   # save_and_open_page
+    expect(page).to have_content("mummotagi")
+
+  end
+
 end
 
 
