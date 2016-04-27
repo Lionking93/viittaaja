@@ -2,155 +2,144 @@
 
 <h3>Books</h3>
 
-<table id="books" class="table table-bordered">
-  <thead>
-  <tr>
-    <th>Citation key</th>
-    <th>Year</th>
-    <th>Publisher</th>
-    <th>Author</th>
-    <th>Editor</th>
-    <th>Title</th>
-    <th>Address</th>
-    <th>Pages</th>
-    <th>Volume</th>
-    <th>Edition</th>
-    <th>Month</th>
-    <th>Series</th>
-    <th>Note</th>
-    <th>Tags</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @books.each do |reference| %>
-      <tr>
-        <td><%= reference.citation_key %></td>
-        <td><%= reference.year %></td>
-        <td><%= reference.publisher %></td>
-        <td><%= reference.author %></td>
-        <td><%= reference.editor %></td>
-        <td><%= reference.title %></td>
-        <td><%= reference.address %></td>
-        <td><%= reference.pages %></td>
-        <td><%= reference.volume %></td>
-        <td><%= reference.edition %></td>
-        <td><%= reference.month %></td>
-        <td><%= reference.series %></td>
-        <td><%= reference.note %></td>
-        <td>
-          <% reference.tags.each do |t| %>
-            <%= t.name %>
-          <% end %>
-        </td>
-        <td><%= link_to 'Edit', edit_reference_path(reference), 'data-no-turbolink' => true, class:"btn btn-danger" %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
-      </tr>
-  <% end %>
+<div id="references"><br>
+  <button id="showOptional" class="btn btn-primary">Show less / more</button>
+  <input id="search" class="search" placeholder="Search" /><br><br>
+  <table id="books" class="table table-bordered">
+    <tbody class="list">
+    <tr>
+      <th class="ignore">Type</th>
+      <th class="ignore">Citation key</th>
+      <th class="ignore">Year</th>
+      <th class="ignore optional">Publisher</th>
+      <th class="ignore optional">Author</th>
+      <th class="ignore optional">Editor</th>
+      <th class="ignore">Title</th>
+      <th class="ignore optional">Address</th>
+      <th class="ignore optional">Pages</th>
+      <th class="ignore optional">Volume</th>
+      <th class="ignore optional">Edition</th>
+      <th class="ignore optional">Month</th>
+      <th class="ignore optional">Series</th>
+      <th class="ignore optional">Note</th>
+      <th class="ignore">Tags</th>
+      <th class="ignore">Actions</th>
+    </tr>
+    <% @books.each do |reference| %>
+    <tr>
+      <td class="reference_type"><%= reference.reference_type %></td>
+      <td class="citation_key"><%= reference.citation_key %></td>
+      <td class="year"><%= reference.year %></td>
+      <td class="publisher optional"><%= reference.publisher %></td>
+      <td class="author optional"><%= reference.author %></td>
+      <td class="editor optional"><%= reference.editor %></td>
+      <td class="title"><%= reference.title %></td>
+      <td class="address optional"><%= reference.address %></td>
+      <td class="pages optional"><%= reference.pages %></td>
+      <td class="volume optional"><%= reference.volume %></td>
+      <td class="edition optional"><%= reference.edition %></td>
+      <td class="month optional"><%= reference.month %></td>
+      <td class="series optional"><%= reference.series %></td>
+      <td class="note optional"><%= reference.note %></td>
+      <td class="tag">
+        <% reference.tags.each do |t| %>
+          <%= t.name %>
+        <% end %>
+      </td>
+      <td><%= link_to 'Edit', edit_reference_path(reference), 'data-no-turbolink' => true, class:"btn btn-danger" %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <th class="ignore">Type</th>
+      <th class="ignore">Citation key</th>
+      <th class="ignore">Year</th>
+      <th class="ignore optional">Journal</th>
+      <th class="ignore optional">Author</th>
+      <th class="ignore">Title</th>
+      <th class="ignore optional">Number</th>
+      <th class="ignore optional">Pages</th>
+      <th class="ignore optional">Volume</th>
+      <th class="ignore optional">Month</th>
+      <th class="ignore optional">Note</th>
+      <th class="ignore optional">Key</th>
+      <th class="ignore optional">Address</th>
+      <th class="ignore optional">Publisher</th>
+      <th class="ignore">Tags</th>
+      <th class="ignore">Actions</th>
+    </tr>
+    <% @articles.each do |reference| %>
+    <tr>
+      <td class="reference_type"><%= reference.reference_type %></td>
+      <td class="citation_key"><%= reference.citation_key %></td>
+      <td class="year"><%= reference.year %></td>
+      <td class="journal optional"><%= reference.journal %></td>
+      <td class="author optional"><%= reference.author %></td>
+      <td class="title"><%= reference.title %></td>
+      <td class="number optional"><%= reference.number %></td>
+      <td class="pages optional"><%= reference.pages %></td>
+      <td class="volume optional"><%= reference.volume %></td>
+      <td class="month optional"><%= reference.month %></td>
+      <td class="note optional"><%= reference.note %></td>
+      <td class="key optional"><%= reference.key %></td>
+      <td class="address optional"><%= reference.address %></td>
+      <td class="publisher optional"><%= reference.publisher %></td>
+      <td class="tag">
+        <% reference.tags.each do |t| %>
+          <%= t.name %>
+        <% end %>
+      </td>
+      <td><%= link_to 'Edit', edit_reference_path(reference), 'data-no-turbolink' => true, class:"btn btn-danger" %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <th class="ignore">Type</th>
+      <th class="ignore">Citation key</th>
+      <th class="ignore">Year</th>
+      <th class="ignore">Booktitle</th>
+      <th class="ignore optional">Author</th>
+      <th class="ignore">Title</th>
+      <th class="ignore optional">Editor</th>
+      <th class="ignore optional">Series</th>
+      <th class="ignore optional">Volume</th>
+      <th class="ignore optional">Pages</th>
+      <th class="ignore optional">Address</th>
+      <th class="ignore optional">Month</th>
+      <th class="ignore optional">Organization</th>
+      <th class="ignore optional">Publisher</th>
+      <th class="ignore optional">Note</th>
+      <th class="ignore optional">Key</th>
+      <th class="ignore">Tags</th>
+      <th class="ignore">Actions</th>
+    </tr>
+    <% @inproceedings.each do |reference| %>
+    <tr>
+      <td class="reference_type"><%= reference.reference_type %></td>
+      <td class="citation_key"><%= reference.citation_key %></td>
+      <td class="year"><%= reference.year %></td>
+      <td class="booktitle"><%= reference.booktitle %></td>
+      <td class="author optional"><%= reference.author %></td>
+      <td class="title"><%= reference.title %></td>
+      <td class="editor optional"><%= reference.editor %></td>
+      <td class="series optional"><%= reference.series %></td>
+      <td class="volume optional"><%= reference.volume %></td>
+      <td class="pages optional"><%= reference.pages %></td>
+      <td class="address optional"><%= reference.address %></td>
+      <td class="month optional"><%= reference.month %></td>
+      <td class="organization optional"><%= reference.organization %></td>
+      <td class="publisher optional"><%= reference.publisher %></td>
+      <td class="note optional"><%= reference.note %></td>
+      <td class="key optional"><%= reference.key %></td>
+      <td class="tag">
+        <% reference.tags.each do |t| %>
+          <%= t.name %>
+        <% end %>
+      </td>
+      <td><%= link_to 'Edit', edit_reference_path(reference), 'data-no-turbolink' => true, class:"btn btn-danger" %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+    </tr>
+    <% end %>
   </tbody>
 </table>
-
-<h3>Articles</h3>
-
-<table id="articles" class="table table-bordered">
-  <thead>
-  <tr>
-    <th>Citation key</th>
-    <th>Year</th>
-    <th>Journal</th>
-    <th>Author</th>
-    <th>Title</th>
-    <th>Number</th>
-    <th>Pages</th>
-    <th>Volume</th>
-    <th>Month</th>
-    <th>Note</th>
-    <th>Key</th>
-    <th>Address</th>
-    <th>Publisher</th>
-    <th>Tags</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @articles.each do |reference| %>
-      <tr>
-        <td><%= reference.citation_key %></td>
-        <td><%= reference.year %></td>
-        <td><%= reference.journal %></td>
-        <td><%= reference.author %></td>
-        <td><%= reference.title %></td>
-        <td><%= reference.number %></td>
-        <td><%= reference.pages %></td>
-        <td><%= reference.volume %></td>
-        <td><%= reference.month %></td>
-        <td><%= reference.note %></td>
-        <td><%= reference.key %></td>
-        <td><%= reference.address %></td>
-        <td><%= reference.publisher %></td>
-        <td>
-          <% reference.tags.each do |t| %>
-            <%= t.name %>
-          <% end %>
-        </td>
-        <td><%= link_to 'Edit', edit_reference_path(reference), 'data-no-turbolink' => true, class:"btn btn-danger" %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-
-
-<h3>Inproceedings</h3>
-
-<table id="inproceedings" class="table table-bordered">
-  <thead>
-  <tr>
-    <th>Citation key</th>
-    <th>Year</th>
-    <th>Booktitle</th>
-    <th>Author</th>
-    <th>Title</th>
-    <th>Editor</th>
-    <th>Series</th>
-    <th>Volume</th>
-    <th>Pages</th>
-    <th>Address</th>
-    <th>Month</th>
-    <th>Organization</th>
-    <th>Publisher</th>
-    <th>Note</th>
-    <th>Key</th>
-    <th>Tags</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @inproceedings.each do |reference| %>
-      <tr>
-        <td><%= reference.citation_key %></td>
-        <td><%= reference.year %></td>
-        <td><%= reference.booktitle %></td>
-        <td><%= reference.author %></td>
-        <td><%= reference.title %></td>
-        <td><%= reference.editor %></td>
-        <td><%= reference.series %></td>
-        <td><%= reference.volume %></td>
-        <td><%= reference.pages %></td>
-        <td><%= reference.address %></td>
-        <td><%= reference.month %></td>
-        <td><%= reference.organization %></td>
-        <td><%= reference.publisher %></td>
-        <td><%= reference.note %></td>
-        <td><%= reference.key %></td>
-        <td>
-          <% reference.tags.each do |t| %>
-            <%= t.name %>
-          <% end %>
-        </td>
-        <td><%= link_to 'Edit', edit_reference_path(reference), 'data-no-turbolink' => true, class:"btn btn-danger" %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+</div>
 
 <%= link_to 'Bibtex', bibtex_path, class:'btn btn-primary' %>
 <%= link_to 'Add reference', new_reference_path, 'data-no-turbolink' => true, class:'btn btn-primary' %>
