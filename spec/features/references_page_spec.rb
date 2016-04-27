@@ -223,6 +223,66 @@ describe 'References page' do
     expect(page).to have_xpath(".//tr", count: 3)
     expect(page).to have_content("Reference was successfully destroyed.")
   end
+
+  it 'having added tags to a reference the tags are properly added and are visible to the user', js: true do
+    WebMock.disable_net_connect!(allow_localhost:true)
+
+    visit references_path
+
+    click_link "Add reference"
+
+    select "Article", from: "reference_reference_type"
+
+    fill_in 'reference_year', with: '1995'
+    fill_in 'reference_author', with: 'teppo'
+    fill_in 'reference_title', with: 'titteli'
+    fill_in 'reference_journal', with: 'science'
+    fill_in 'reference_volume', with: '14'
+    fill_in 'tag_field', with: 'mummotägi pappatägi'
+
+    click_button "Create Reference"
+
+   #@article_reference = find_by_id('articles').find('tbody').find('tr:nth-child(1)')
+   #expect(page).to have_xpath(".//tr", count: 4)
+
+    expect(page).to have_content("mummotägi")
+    expect(page).to have_content("pappatägi")
+
+   #expect(page).to have_xpath(".//tr", count: 3)
+  end
+
+  it 'deleting tags remove them from a reference', js: true do
+    WebMock.disable_net_connect!(allow_localhost:true)
+
+
+    visit references_path
+
+    click_link "Add reference"
+
+    select "Article", from: "reference_reference_type"
+
+    fill_in 'reference_year', with: '1995'
+    fill_in 'reference_author', with: 'teppo'
+    fill_in 'reference_title', with: 'titteli'
+    fill_in 'reference_journal', with: 'science'
+    fill_in 'reference_volume', with: '14'
+    fill_in 'tag_field', with: 'mummotägi pappatägi'
+
+    click_button "Create Reference"
+
+    click_link "Edit"
+
+    select "Article", from: "reference_reference_type"
+
+    fill_in 'tag_field', with: ''
+
+    click_button "Update Reference"
+
+    expect(page).to_not have_content("mummotägi")
+    expect(page).to_not have_content("pappatägi")
+
+  end
+
 end
 
 
