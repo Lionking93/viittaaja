@@ -42,9 +42,7 @@
       <td class="series optional"><%= reference.series %></td>
       <td class="note optional"><%= reference.note %></td>
       <td class="tag">
-        <% reference.tags.each do |t| %>
-          <%= t.name %>
-        <% end %>
+        <% reference.tags.each do |t| %><%= t.name %> <% end %>
       </td>
       <td><%= link_to 'Edit', edit_reference_path(reference), 'data-no-turbolink' => true, class:"btn btn-danger" %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
     </tr>
@@ -83,10 +81,9 @@
       <td class="key optional"><%= reference.key %></td>
       <td class="address optional"><%= reference.address %></td>
       <td class="publisher optional"><%= reference.publisher %></td>
-      <td class="tag">
-        <% reference.tags.each do |t| %>
-          <%= t.name %>
-        <% end %>
+      <td class="tag"><p>
+        <% reference.tags.each do |t| %><%= t.name %> <% end %>
+      </p>
       </td>
       <td><%= link_to 'Edit', edit_reference_path(reference), 'data-no-turbolink' => true, class:"btn btn-danger" %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
     </tr>
@@ -130,9 +127,8 @@
       <td class="note optional"><%= reference.note %></td>
       <td class="key optional"><%= reference.key %></td>
       <td class="tag">
-        <% reference.tags.each do |t| %>
-          <%= t.name %>
-        <% end %>
+        <% reference.tags.each do |t| %><%= t.name %> <% end %>
+      </p>
       </td>
       <td><%= link_to 'Edit', edit_reference_path(reference), 'data-no-turbolink' => true, class:"btn btn-danger" %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
     </tr>
