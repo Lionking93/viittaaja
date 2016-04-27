@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$("#reference_tags").unbind();
-	$("#reference_tags").change(function() {
+	$("#reference_tags").on('click', function() {
 		var value = $("#reference_tags").val();
 		var option_text = $("#reference_tags option[value='"+ value +"']").text();
 		if ($("#tag_field").val() === '') {
