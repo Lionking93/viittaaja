@@ -1,23 +1,25 @@
 <h2>References</h2>
 
 <div id="references"><br>
-  <table>
-    <tr>
-      <td>
-        <input id="search" class="search" placeholder="Search" />
-        <input id="fuzzy-search" class="fuzzy-search" placeholder="Search" /><br><br>
-      </td>
-      <td>
-        <%= link_to 'Add reference', new_reference_path, 'data-no-turbolink' => true, class:'btn btn-primary', style:"margin-bottom: 20px; margin-right: 5px" %>
-      </td>
-      <td>
-        <%= link_to 'Bibtex', bibtex_path, class:'btn btn-primary', style:"margin-bottom: 20px; margin-right: 5px" %>
-      </td>
-      <td>
-        <button style="margin-bottom: 20px" id="showOptional" class="btn btn-primary">Show less / more</button>
-      </td>
-    </tr>
-  </table>
+  <div  class="table-responsive">
+    <table>
+      <tr>
+        <td>
+          <input id="search" class="search" placeholder="Search" />
+          <input id="fuzzy-search" class="fuzzy-search" placeholder="Search" /><br><br>
+        </td>
+        <td>
+          <%= link_to 'Add reference', new_reference_path, 'data-no-turbolink' => true, class:'btn btn-primary', style:"margin-bottom: 20px; margin-right: 5px" %>
+        </td>
+        <td>
+          <%= link_to 'Bibtex', bibtex_path, class:'btn btn-primary', style:"margin-bottom: 20px; margin-right: 5px" %>
+        </td>
+        <td>
+          <button style="margin-bottom: 20px" id="showOptional" class="btn btn-primary">Show less / more</button>
+        </td>
+      </tr>
+    </table>
+  </div>
   <div  class="table-responsive">
   <table id="referenceslist" class="table table-bordered">
     <thead>
