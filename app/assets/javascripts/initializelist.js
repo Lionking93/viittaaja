@@ -6,9 +6,9 @@ $( window ).load(function(){
     var fuzzyOptions = {
         searchClass: "fuzzy-search",
         location: 0,
-        distance: 100,
-        treshold: 0.4,
-            multisearch: true
+        distance: 0,
+        treshold: 0.0,
+            multisearch: false
     };
 
     var options = {
