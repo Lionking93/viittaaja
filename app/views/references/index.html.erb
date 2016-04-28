@@ -8,6 +8,12 @@
         <input id="fuzzy-search" class="fuzzy-search" placeholder="Search" /><br><br>
       </td>
       <td>
+        <%= link_to 'Add reference', new_reference_path, 'data-no-turbolink' => true, class:'btn btn-primary', style:"margin-bottom: 20px; margin-right: 5px" %>
+      </td>
+      <td>
+        <%= link_to 'Bibtex', bibtex_path, class:'btn btn-primary', style:"margin-bottom: 20px; margin-right: 5px" %>
+      </td>
+      <td>
         <button style="margin-bottom: 20px" id="showOptional" class="btn btn-primary">Show less / more</button>
       </td>
     </tr>
@@ -71,6 +77,3 @@
   </table>
     </div>
 </div>
-
-<%= link_to 'Bibtex', bibtex_path, class:'btn btn-primary' %>
-<%= link_to 'Add reference', new_reference_path, 'data-no-turbolink' => true, class:'btn btn-primary' %>
