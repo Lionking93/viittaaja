@@ -319,6 +319,50 @@ describe 'References page' do
 
   end
 
+  it 'in creation, tags are remembered if validation fails', js:true do
+    WebMock.disable_net_connect!(allow_localhost:true)
+
+
+    visit references_path
+
+    click_link "Add reference"
+
+    select "Article", from: "reference_reference_type"
+
+    fill_in 'tag_field', with: 'mummotagi'
+
+    click_button "Create Reference"
+
+    expect(page).to have_content("mummotagi")
+  end
+
+  it 'when editing, tags are remembered if validation fails', js:true do
+    WebMock.disable_net_connect!(allow_localhost:true)
+
+    visit references_path
+
+    click_link "Add reference"
+
+    select "Article", from: "reference_reference_type"
+
+    fill_in 'reference_year', with: '1995'
+    fill_in 'reference_author', with: 'teppo'
+    fill_in 'reference_title', with: 'titteli'
+    fill_in 'reference_journal', with: 'science'
+    fill_in 'reference_volume', with: '14'
+
+    click_button "Create Reference"
+    click_link "Edit"
+
+    fill_in 'reference_author', with: ''
+    fill_in 'tag_field', with: 'ekatagi tokatagi'
+
+    click_button "Update Reference"
+
+    expect(page).to have_content("ekatagi tokatagi")
+
+  end
+
 end
 
 

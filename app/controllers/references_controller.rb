@@ -128,15 +128,4 @@ class ReferencesController < ApplicationController
       tags
     end
 
-  def tags_to_string(tags)
-    tags = ""
-    tags.each do |t|
-      if (tags == "")
-        tags = t.name
-      else
-        tags += " " + t.name
-      end
-    end
-    tags
-  end
 end
