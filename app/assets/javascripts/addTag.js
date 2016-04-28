@@ -7,6 +7,6 @@ $(document).ready(function() {
 			$("#tag_field").val(option_text);
 		} else {
 			$("#tag_field").val($("#tag_field").val() + " " + option_text);
-		}	
+		}
 	});
 });

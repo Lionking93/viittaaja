@@ -42,6 +42,7 @@ class ReferencesController < ApplicationController
         format.json { render :show, status: :created, location: @reference }
       else
         @tags = Tag.all
+        @reference_tags = "" + params[:tag_field] unless params[:tag_field].nil?
         format.html { render :new }
         format.json { render json: @reference.errors, status: :unprocessable_entity }
       end
@@ -58,6 +59,7 @@ class ReferencesController < ApplicationController
         format.json { render :show, status: :ok, location: @reference }
       else
         @tags = Tag.all
+        @reference_tags = "" + params[:tag_field] unless params[:tag_field].nil?
         format.html { render :edit }
         format.json { render json: @reference.errors, status: :unprocessable_entity }
       end
@@ -125,4 +127,5 @@ class ReferencesController < ApplicationController
       end
       tags
     end
+
 end
