@@ -79,16 +79,21 @@
   <div class="field reference_tags">
     <%= f.label :tags %><br>
     <% if !@reference.nil? %>
-      <%= text_area_tag(:tag_field, @reference_tags, size: "20x5") %>
+      <input id="tag_field" list="tag_list" value="<%= @reference_tags %>" />
     <% else %>
-      <%= text_area_tag(:tag_field, size: "20x5") %>
+      <input id="tag_field" list="tag_list" />
     <% end %>
-    <% if @tags.any? %>
-      <%= f.select :tags, options_from_collection_for_select(@tags, :id, :name) %>
-    <% end %>
+    <datalist id="tag_list">
+      <% @tags.each do |t| %>
+        <option value=<%= t.name %>>
+      <% end %>
+    </datalist>
+    <br><br>
+    <div id="added_tags"></div>
   </div>
   <div class="actions">
     <br />
     <%= link_to 'Back', references_path, class:"btn btn-primary" %> <%= f.submit class:"btn btn-primary" %>
   </div>
 <% end %>
+
