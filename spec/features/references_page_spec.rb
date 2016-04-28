@@ -9,13 +9,13 @@ describe 'References page' do
 
     visit references_path
 
-    @book_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(2)')
-    @article_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(4)')
-    @inproceeding_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(6)')
+    @book_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(1)')
+    @article_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(2)')
+    @inproceeding_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(3)')
 
     expect(@book_reference.text).to eq "book 1990 Suomiboyz Teppo Matti EditDestroy"
-    expect(@article_reference.text).to eq "article 1980 dsaasd Barack Öbämå USA 1 EditDestroy"
-    expect(@inproceeding_reference.text).to eq "inproceeding 1930 herp asd jou EditDestroy"
+    expect(@article_reference.text).to eq "article 1980 Barack Öbämå dsaasd USA 1 EditDestroy"
+    expect(@inproceeding_reference.text).to eq "inproceeding 1930 asd jou herp EditDestroy"
   end
 
   it 'when a new book is added, shows it on the page' do
@@ -25,7 +25,7 @@ describe 'References page' do
 
     visit references_path
 
-    expect(page).to have_xpath(".//tr", count: 5)
+    expect(page).to have_xpath(".//tr", count: 4)
     expect(page).not_to have_content("2000 Kebab on hyvää")
 
     click_link "Add reference"
@@ -35,7 +35,7 @@ describe 'References page' do
     fill_in 'reference_author', with: 'on'
     fill_in 'reference_title', with: 'hyvää'
     click_button "Create Reference"
-    expect(page).to have_xpath(".//tr", count: 6)
+    expect(page).to have_xpath(".//tr", count: 5)
 
     expect(page).to have_content("2000 Kebab on hyvää")
   end
@@ -61,7 +61,7 @@ describe 'References page' do
   it 'new article is added' do
     visit references_path
 
-    expect(page).to have_xpath(".//tr", count: 3)
+    expect(page).to have_xpath(".//tr", count: 2)
 
     click_link "Add reference"
 
@@ -74,19 +74,19 @@ describe 'References page' do
     fill_in 'reference_volume', with: '14'
 
     click_button "Create Reference"
-    expect(page).to have_xpath(".//tr", count: 4)
+    expect(page).to have_xpath(".//tr", count: 3)
 
     expect(page).to have_content("science")
 
-    @article_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(3)')
+    @article_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(1)')
 
-    expect(@article_reference.text).to eq "article te1995 1995 science teppo titteli 14 EditDestroy"
+    expect(@article_reference.text).to eq "article te1995 1995 teppo science titteli 14 EditDestroy"
   end
 
   it 'article is not added with insufficient fields' do
     visit references_path
 
-    expect(page).to have_xpath(".//tr", count: 3)
+    expect(page).to have_xpath(".//tr", count: 2)
 
     click_link "Add reference"
 
@@ -103,14 +103,14 @@ describe 'References page' do
 
     visit references_path
     
-    expect(page).to have_xpath(".//tr", count: 3)
+    expect(page).to have_xpath(".//tr", count: 2)
     expect(page).not_to have_content("science")
   end
 
   it 'new inproceedings is added' do
     visit references_path
 
-    expect(page).to have_xpath(".//tr", count: 3)
+    expect(page).to have_xpath(".//tr", count: 2)
 
     click_link "Add reference"
 
@@ -122,17 +122,17 @@ describe 'References page' do
     fill_in 'reference_booktitle', with: 'nature'
 
     click_button "Create Reference"
-    expect(page).to have_xpath(".//tr", count: 4)
+    expect(page).to have_xpath(".//tr", count: 3)
 
-    @inproceedings_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(4)')
+    @inproceedings_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(1)')
 
-    expect(@inproceedings_reference.text).to eq "inproceeding wo1991 1991 nature world blue EditDestroy"
+    expect(@inproceedings_reference.text).to eq "inproceeding wo1991 1991 world blue nature EditDestroy"
   end
 
   it 'inproceedings is not added with insufficient fields' do
     visit references_path
 
-    expect(page).to have_xpath(".//tr", count: 3)
+    expect(page).to have_xpath(".//tr", count: 2)
 
     click_link "Add reference"
 
@@ -149,7 +149,7 @@ describe 'References page' do
 
     visit references_path
     
-    expect(page).to have_xpath(".//tr", count: 3)
+    expect(page).to have_xpath(".//tr", count: 2)
     expect(page).not_to have_content("the future")
   end
 
@@ -161,18 +161,18 @@ describe 'References page' do
     visit references_path
 
     @article_reference = find_by_id('references').find('tbody').find('tr:nth-child(1)')
-    expect(page).to have_xpath(".//tr", count: 4)
+    expect(page).to have_xpath(".//tr", count: 3)
 
     click_link "Edit"
 
     fill_in 'reference_year', with: '1611'
     click_button "Update Reference"
 
-    expect(page).to have_xpath(".//tr", count: 4)
+    expect(page).to have_xpath(".//tr", count: 3)
     expect(page).to have_content("Reference was successfully updated.")
 
-    @article_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(3)')
-    expect(@article_reference.text).to eq "article 1611 dsaasd Barack Öbämå USA 1 EditDestroy"
+    @article_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(1)')
+    expect(@article_reference.text).to eq "article 1611 Barack Öbämå dsaasd USA 1 EditDestroy"
   end
 
 
@@ -183,7 +183,7 @@ describe 'References page' do
     visit references_path
 
     @article_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(1)')
-    expect(page).to have_xpath(".//tr", count: 4)
+    expect(page).to have_xpath(".//tr", count: 3)
 
     click_link "Edit"
 
@@ -213,14 +213,14 @@ describe 'References page' do
     click_button "Create Reference"
 
     @article_reference = find_by_id('referenceslist').find('tbody').find('tr:nth-child(1)')
-    expect(page).to have_xpath(".//tr", count: 4)
+    expect(page).to have_xpath(".//tr", count: 3)
 
     click_link "Destroy"
 
     page.driver.browser.switch_to.alert.accept
 
     expect(page).not_to have_content("USA")
-    expect(page).to have_xpath(".//tr", count: 3)
+    expect(page).to have_xpath(".//tr", count: 2)
     expect(page).to have_content("Reference was successfully destroyed.")
   end
 
