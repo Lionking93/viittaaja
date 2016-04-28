@@ -363,6 +363,28 @@ describe 'References page' do
 
   end
 
+  it 'when adding book with both editor and author, validation fails', js:true do
+    WebMock.disable_net_connect!(allow_localhost:true)
+
+    visit references_path
+
+    click_link "Add reference"
+
+    select "Book", from: "reference_reference_type"
+
+    fill_in 'reference_editor', with: 'matti'
+    fill_in 'reference_publisher', with: 'antti'
+    fill_in 'reference_year', with: '1995'
+    fill_in 'reference_author', with: 'teppo'
+    fill_in 'reference_title', with: 'titteli'
+
+    click_button "Create Reference"
+
+    expect(page).to have_content("or editor must be specified, but not both")
+    expect(page).to have_content("or author must be specified, but not both")
+
+  end
+
 end
 
 
