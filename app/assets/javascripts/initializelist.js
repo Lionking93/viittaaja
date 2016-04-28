@@ -13,8 +13,7 @@ $( document ).ready(function(){
     };
 
     var options = {
-        valueNames: [ 'reference_type', 'citation_key', 'reference_type', 'year', 'publisher', 'journal', 'author', 'editor', 'title', 'booktitle', 'address', 'pages', 'volume', 'edition', 'organization', 'key', 'month', 'series', 'note', 'tag' ]
-        //    plugins: [ ListFuzzySearch() ]
+        valueNames: [ 'reference_type', 'citation_key', 'reference_type', 'year', 'publisher', 'journal', 'author', 'editor', 'title', 'booktitle', 'address', 'pages', 'volume', 'edition', 'organization', 'key', 'month', 'series', 'note', 'tag']
     };
 
     var optionsfuzzy = {
@@ -50,5 +49,7 @@ $( document ).ready(function(){
 
     $('#fuzzy-search').css({display: "none"});
     referenceList.sort('reference_type', { asc: true });
+
+
 
 });
