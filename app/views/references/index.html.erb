@@ -1,6 +1,6 @@
 <h2>References</h2>
 
-<div id="references"><br>
+
   <div  class="table-responsive">
     <table>
       <tr>
@@ -20,36 +20,37 @@
       </tr>
     </table>
   </div>
-  <div  class="table-responsive">
-  <table id="referenceslist" class="table table-bordered">
+<div  class="table-responsive">
+  <div id="references">
+  <table class="table table-bordered">
     <thead>
     <tr>
-      <th class="ignore">Type</th>
-      <th class="ignore">Citation key</th>
-      <th class="ignore">Year</th>
-      <th class="ignore optional">Publisher</th>
-      <th class="ignore optional">Author</th>
-      <th class="ignore optional">Editor</th>
-      <th class="ignore optional">Journal</th>
-      <th class="ignore">Title</th>
-      <th class="ignore">Booktitle</th>
-      <th class="ignore optional">Organization</th>
-      <th class="ignore optional">Address</th>
-      <th class="ignore optional">Pages</th>
-      <th class="ignore optional">Volume</th>
-      <th class="ignore optional">Edition</th>
-      <th class="ignore optional">Number</th>
-      <th class="ignore optional">Month</th>
-      <th class="ignore optional">Series</th>
-      <th class="ignore optional">Key</th>
-      <th class="ignore optional">Note</th>
-      <th class="ignore">Tags</th>
-      <th class="ignore">Actions</th>
+      <th class="sort" data-sort="reference_type" >Type</th>
+      <th class="sort" data-sort="citation_key" >Citation key</th>
+      <th class="sort" data-sort="year" >Year</th>
+      <th class="sort optional" data-sort="publisher" >Publisher</th>
+      <th class="sort optional" data-sort="author" >Author</th>
+      <th class="sort optional" data-sort="editor" >Editor</th>
+      <th class="sort optional" data-sort="journal" >Journal</th>
+      <th class="sort" data-sort="title" >Title</th>
+      <th class="sort" data-sort="booktitle" >Booktitle</th>
+      <th class="sort optional" data-sort="organization" >Organization</th>
+      <th class="sort optional" data-sort="address" >Address</th>
+      <th class="sort optional" data-sort="pages" >Pages</th>
+      <th class="sort optional" data-sort="volume" >Volume</th>
+      <th class="sort optional" data-sort="edition" >Edition</th>
+      <th class="sort optional" data-sort="number" >Number</th>
+      <th class="sort optional" data-sort="month" >Month</th>
+      <th class="sort optional" data-sort="series" >Series</th>
+      <th class="sort optional" data-sort="key" >Key</th>
+      <th class="sort optional" data-sort="note" >Note</th>
+      <th class="sort">Tags</th>
+      <th class="sort">Actions</th>
     </tr>
     </thead>
     <tbody class="list">
       <% @references.each do |reference| %>
-        <tr class="reference_item">
+        <tr>
           <td class="reference_type"><%= reference.reference_type %></td>
           <td class="citation_key"><%= reference.citation_key %></td>
           <td class="year"><%= reference.year %></td>
@@ -77,5 +78,5 @@
       <% end %>
     </tbody>
   </table>
-    </div>
+  </div>
 </div>

@@ -1,7 +1,8 @@
 /**
  * Created by antti on 27.4.2016.
  */
-$( window ).load(function(){
+
+$( document ).ready(function(){
 
     var fuzzyOptions = {
         searchClass: "fuzzy-search",
@@ -13,12 +14,12 @@ $( window ).load(function(){
 
     var options = {
         valueNames: [ 'reference_type', 'citation_key', 'reference_type', 'year', 'publisher', 'journal', 'author', 'editor', 'title', 'booktitle', 'address', 'pages', 'volume', 'edition', 'organization', 'key', 'month', 'series', 'note', 'tag' ]
-    //    plugins: [ ListFuzzySearch() ]
+        //    plugins: [ ListFuzzySearch() ]
     };
 
     var optionsfuzzy = {
         valueNames: [ 'reference_type', 'citation_key', 'reference_type', 'year', 'publisher', 'journal', 'author', 'editor', 'title', 'booktitle', 'address', 'pages', 'volume', 'edition', 'organization', 'key', 'month', 'series', 'note', 'tag' ],
-            plugins: [ ListFuzzySearch() ]
+        plugins: [ ListFuzzySearch() ]
     };
 
     var referenceList = new List('references', options);
@@ -39,15 +40,15 @@ $( window ).load(function(){
         }
     });
     $('#fuzzy-search').on('input', function(){
-       if($('#fuzzy-search').val().indexOf(' ') <= 0){
-           $('#fuzzy-search').css({display: "none"});
-           $('#search').css({display: "inline"});
-           $('#search').val($('#fuzzy-search').val());
-           $('#search').focus();
-       }
+        if($('#fuzzy-search').val().indexOf(' ') <= 0){
+            $('#fuzzy-search').css({display: "none"});
+            $('#search').css({display: "inline"});
+            $('#search').val($('#fuzzy-search').val());
+            $('#search').focus();
+        }
     });
 
-});
-$( document ).ready(function(){
     $('#fuzzy-search').css({display: "none"});
+    referenceList.sort('reference_type', { asc: true });
+
 });
