@@ -15,10 +15,11 @@
     <header>
       <%= render 'layouts/navigation' %>
     </header>
-    <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
-    </main>
+    
+    <div class="container-fluid">
+      <%= render 'layouts/messages' %>
+      <%= yield %>
+    </div>
 
   </body>
 </html>
