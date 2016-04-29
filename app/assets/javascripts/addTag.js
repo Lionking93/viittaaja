@@ -6,10 +6,9 @@ $(document).ready(function() {
 	$(window).load(function() {
 		if ($('#tag_field').val !== '') {
 			tags = $("#tag_field").val().split(/\s+/);
-			console.log(tags);
 			if (tags.length > 1 || tags[0] !== '') {
             	for (i = 0; i < tags.length; i++) {
-            		$("#added_tags").append("<input class='tags btn btn-info' name='tags[]' id='tag' value="+tags[i]+" /> ");
+            		$("#added_tags").append("<input class='tags btn btn-info' name='tags[]' id='tag' value="+tags[i].toLowerCase()+" /> ");
             		$(".tags").autoresize({padding:50,minWidth:40,maxWidth:300});
             		$("#tag_field").val('');
             	}	
@@ -23,7 +22,7 @@ $(document).ready(function() {
        		if (options[i].value == $(this).val()) {
        			var tag_value = $("#tag_field").val();
        			tag_value.trim();
-        		$("#added_tags").append("<input class='tags btn btn-info' name='tags[]' id='tag' value="+tag_value+" /> ");
+        		$("#added_tags").append("<input class='tags btn btn-info' name='tags[]' id='tag' value="+tag_value.toLowerCase()+" /> ");
         		$(".tags").autoresize({padding:50,minWidth:40,maxWidth:300});
         		$("#tag_field").val('');
        		}
@@ -41,7 +40,7 @@ $(document).ready(function() {
             	tags = $("#tag_field").val().split(/\s+/);
             	if (tags.length > 1 || tags[0] !== '') {
             		for (i = 0; i < tags.length; i++) {
-            			$("#added_tags").append("<input class='tags btn btn-info' name='tags[]' id='tag' value="+tags[i]+" /> ");
+            			$("#added_tags").append("<input class='tags btn btn-info' name='tags[]' id='tag' value="+tags[i].toLowerCase()+" /> ");
             			$(".tags").autoresize({padding:50,minWidth:40,maxWidth:300});
             			$("#tag_field").val('');
             		}
