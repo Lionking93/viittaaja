@@ -79,9 +79,9 @@
   <div class="field reference_tags">
     <%= f.label :tags %><br>
     <% if !@reference.nil? %>
-      <input id="tag_field" list="tag_list" value="<%= @reference_tags %>" />
+      <input id="tag_field" list="tag_list" value="<%= @reference_tags %>" placeholder="Press enter to add tags" />
     <% else %>
-      <input id="tag_field" list="tag_list" />
+      <input id="tag_field" list="tag_list" placeholder="Press enter to add tags" />
     <% end %>
     <datalist id="tag_list">
       <% @tags.each do |t| %>
@@ -93,7 +93,7 @@
   </div>
   <div class="actions">
     <br />
-    <%= link_to 'Back', references_path, class:"btn btn-primary" %> <%= f.submit class:"btn btn-primary" %>
+    <%= link_to 'Back', references_path, 'data-no-turbolink' => true, class:"btn btn-primary" %> <%= f.submit class:"btn btn-primary" %>
   </div>
 <% end %>
 

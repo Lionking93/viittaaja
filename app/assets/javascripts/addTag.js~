@@ -1,4 +1,5 @@
 $(document).ready(function() {
+<<<<<<< HEAD
 	$("#tag_field").unbind();
 
 	var tags = [];
@@ -14,6 +15,16 @@ $(document).ready(function() {
             		$("#tag_field").val('');
             	}	
         	}
+=======
+	$("#reference_tags").unbind();
+	$("#reference_tags").on('click', function() {
+		var value = $("#reference_tags").val();
+		var option_text = $("#reference_tags option[value='"+ value +"']").text();
+		if ($("#tag_field").val() === '') {
+			$("#tag_field").val(option_text);
+		} else {
+			$("#tag_field").val($("#tag_field").val() + " " + option_text);
+>>>>>>> a251f9211fd6e6fbc2a37ddd6cb4b86a2cbe477e
 		}
 	});
 

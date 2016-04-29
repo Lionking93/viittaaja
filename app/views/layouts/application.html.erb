@@ -9,17 +9,17 @@
     <%= javascript_include_tag 'addreference.js' %>
     <%= javascript_include_tag 'autoresize-plugin.js' %>
     <%= javascript_include_tag 'addTag.js' %>
-    <%= javascript_include_tag 'clipboard.min.js' %>
     <%= csrf_meta_tags %>
   </head>
   <body>
     <header>
       <%= render 'layouts/navigation' %>
     </header>
-    <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
-    </main>
+
+    <div class="container-fluid">
+      <%= render 'layouts/messages' %>
+      <%= yield %>
+    </div>
 
   </body>
 </html>

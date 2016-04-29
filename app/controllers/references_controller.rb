@@ -1,4 +1,5 @@
 class ReferencesController < ApplicationController
+  include ReferenceTags
   before_action :set_reference, only: [:show, :edit, :update, :destroy]
 
   # GET /references
@@ -27,7 +28,7 @@ class ReferencesController < ApplicationController
   # GET /references/1/edit
   def edit
     @tags = Tag.all
-    @reference_tags = "" + reference_tags_to_string(@reference)
+    @reference_tags = "" + reference_tags_to_string(@reference.tags)
   end
 
   # POST /references
@@ -42,6 +43,7 @@ class ReferencesController < ApplicationController
         format.json { render :show, status: :created, location: @reference }
       else
         @tags = Tag.all
+        @reference_tags = "" + tags_to_string(params[:tags]) unless params[:tags].nil?
         format.html { render :new }
         format.json { render json: @reference.errors, status: :unprocessable_entity }
       end
@@ -58,6 +60,7 @@ class ReferencesController < ApplicationController
         format.json { render :show, status: :ok, location: @reference }
       else
         @tags = Tag.all
+        @reference_tags = "" + tags_to_string(params[:tags]) unless params[:tags].nil?
         format.html { render :edit }
         format.json { render json: @reference.errors, status: :unprocessable_entity }
       end
@@ -84,49 +87,5 @@ class ReferencesController < ApplicationController
     def reference_params
       params.require(:reference).permit(:user_id, :year, :publisher, :author, :journal, :title, :booktitle, :editor, :address, :organization, :pages, :volume,
        :number, :edition, :month, :series, :note, :reference_type, :key)
-    end
-
-    def add_reference_tags(reference, tags)
-      if !tags.nil?
-        tags.each do |t|
-          if !Tag.find_by(name: t).nil?
-            if @reference.tags.find_by(name: t).nil?
-              @reference.tags << Tag.find_by(name: t)
-            end 
-          else          
-            @reference.tags.create(name: t) 
-          end
-        end
-        tags
-      end
-    end
-
-    def update_reference_tags(reference, tags)
-      update_tags = add_reference_tags(reference, tags)
-      if update_tags.nil?
-        update_tags = []
-      end
-      delete_reference_tags(reference, update_tags)
-    end
-
-    def delete_reference_tags(reference, tags)
-      reference.tags.each do |t|
-        if !tags.include? t.name
-          tag = Tag.find_by(name: t.name)
-          reference.tags.delete(tag.id)
-        end
-      end
-    end
-
-    def reference_tags_to_string(reference)
-      tags = ""
-      reference.tags.each do |t|
-        if (tags == "") 
-          tags = t.name
-        else 
-          tags += " " + t.name
-        end
-      end
-      tags
     end
 end
