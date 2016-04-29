@@ -28,7 +28,7 @@ class ReferencesController < ApplicationController
   # GET /references/1/edit
   def edit
     @tags = Tag.all
-    @reference_tags = "" + reference_tags_to_string(@reference.tags)
+    @reference_tags = "" + tags_to_string(convert_reference_tag_names_to_array(@reference.tags))
   end
 
   # POST /references

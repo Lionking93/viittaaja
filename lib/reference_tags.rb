@@ -32,16 +32,12 @@ module ReferenceTags
       end
     end
 
-    def reference_tags_to_string(tags)
-      tags_as_string = ""
+    def convert_reference_tag_names_to_array(tags)
+      tag_names = []
       tags.each do |t|
-        if (tags_as_string == "") 
-          tags_as_string = t.name
-        else 
-          tags_as_string += " " + t.name
-        end
+        tag_names << t.name
       end
-      tags_as_string
+      tag_names
     end
 
     def tags_to_string(tags)
