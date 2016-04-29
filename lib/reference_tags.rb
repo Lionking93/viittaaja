@@ -3,6 +3,7 @@ module ReferenceTags
 	def add_reference_tags(reference, tags)
       if !tags.nil?
         tags.each do |t|
+          t.downcase
           if !Tag.find_by(name: t).nil?
             if @reference.tags.find_by(name: t).nil?
               @reference.tags << Tag.find_by(name: t)
