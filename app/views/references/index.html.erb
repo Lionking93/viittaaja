@@ -1,55 +1,51 @@
 <h2>References</h2>
 
-
 <div id="references">
-  <div  class="table-responsive">
-    <table>
-      <tr>
-        <td>
-          <input id="search" class="search" placeholder="Search" style="margin-right: 5px" />
-          <input id="fuzzy-search" class="fuzzy-search" placeholder="Search" style="margin-right: 5px" /><br><br>
-        </td>
-        <td>
-          <%= link_to 'Add reference', new_reference_path, 'data-no-turbolink' => true, class:'btn btn-primary', style:"margin-bottom: 20px; margin-right: 5px" %>
-        </td>
-        <td>
-          <%= link_to 'Bibtex', bibtex_path, class:'btn btn-primary', style:"margin-bottom: 20px; margin-right: 5px" %>
-        </td>
-        <td>
-          <button style="margin-bottom: 20px" id="showOptional" class="btn btn-primary">Show less / more</button>
-        </td>
-      </tr>
-    </table>
-  </div>
-<div  class="table-responsive">
+  <table>
+    <tr>
+      <td>
+        <input id="search" class="search" placeholder="Search" style="margin-right: 5px" />
+        <input id="fuzzy-search" class="fuzzy-search" placeholder="Search" style="margin-right: 5px" /><br><br>
+      </td>
+      <td>
+        <%= link_to 'Add reference', new_reference_path, 'data-no-turbolink' => true, class:'btn btn-primary', style:"margin-bottom: 20px; margin-right: 5px" %>
+      </td>
+      <td>
+        <%= link_to 'Bibtex', bibtex_path, class:'btn btn-primary', style:"margin-bottom: 20px; margin-right: 5px" %>
+      </td>
+      <td>
+        <button style="margin-bottom: 20px" id="showOptional" class="btn btn-primary">Show less / more</button>
+      </td>
+    </tr>
+  </table>
   <table id="referenceslist" class="table table-bordered">
     <thead>
     <tr>
-      <th class="sort" data-sort="reference_type" >Type</th>
-      <th class="sort" data-sort="citation_key" >Citation key</th>
-      <th class="sort" data-sort="year" >Year</th>
-      <th class="sort optional" data-sort="publisher" >Publisher</th>
-      <th class="sort optional" data-sort="author" >Author</th>
-      <th class="sort optional" data-sort="editor" >Editor</th>
-      <th class="sort optional" data-sort="journal" >Journal</th>
-      <th class="sort" data-sort="title" >Title</th>
-      <th class="sort" data-sort="booktitle" >Booktitle</th>
-      <th class="sort optional" data-sort="organization" >Organization</th>
-      <th class="sort optional" data-sort="address" >Address</th>
-      <th class="sort optional" data-sort="pages" >Pages</th>
-      <th class="sort optional" data-sort="volume" >Volume</th>
-      <th class="sort optional" data-sort="edition" >Edition</th>
-      <th class="sort optional" data-sort="number" >Number</th>
-      <th class="sort optional" data-sort="month" >Month</th>
-      <th class="sort optional" data-sort="series" >Series</th>
-      <th class="sort optional" data-sort="key" >Key</th>
-      <th class="sort optional" data-sort="note" >Note</th>
+      <th class="sort" data-sort="reference_type">Type</th>
+      <th class="sort" data-sort="citation_key">Citation key</th>
+      <th class="sort" data-sort="year">Year</th>
+      <th class="sort optional" data-sort="publisher">Publisher</th>
+      <th class="sort optional" data-sort="author">Author</th>
+      <th class="sort optional" data-sort="editor">Editor</th>
+      <th class="sort optional" data-sort="journal">Journal</th>
+      <th class="sort" data-sort="title">Title</th>
+      <th class="sort" data-sort="booktitle">Booktitle</th>
+      <th class="sort optional" data-sort="organization">Organization</th>
+      <th class="sort optional" data-sort="address">Address</th>
+      <th class="sort optional" data-sort="pages">Pages</th>
+      <th class="sort optional" data-sort="volume">Volume</th>
+      <th class="sort optional" data-sort="edition">Edition</th>
+      <th class="sort optional" data-sort="number">Number</th>
+      <th class="sort optional" data-sort="month">Month</th>
+      <th class="sort optional" data-sort="series">Series</th>
+      <th class="sort optional" data-sort="key">Key</th>
+      <th class="sort optional" data-sort="note">Note</th>
       <th class="sort">Tags</th>
       <th class="sort">Actions</th>
     </tr>
     </thead>
     <tbody class="list">
-      <% @references.each do |reference| %>
+    <% @references.each do |reference| %>
         <tr>
           <td class="reference_type"><%= reference.reference_type %></td>
           <td class="citation_key"><%= reference.citation_key %></td>
@@ -75,8 +71,8 @@
           </td>
           <td><%= link_to 'Edit', edit_reference_path(reference), 'data-no-turbolink' => true, class:"btn btn-danger" %><%= link_to 'Destroy', reference, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
         </tr>
-      <% end %>
+    <% end %>
     </tbody>
   </table>
-  </div>
+
 </div>
