@@ -19,7 +19,6 @@ describe 'References page' do
   end
 
   it 'when a new book is added, shows it on the page' do
-    User.create username:"asd"
     Reference.create reference_type:'book', year:1990, author:"Teppo", title:"Matti", publisher:"Suomiboyz"
     Reference.create reference_type:'book', year:1990, author:"Barack Öbämå", title:"USA", publisher:"asd"
 

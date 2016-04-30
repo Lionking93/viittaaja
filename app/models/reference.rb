@@ -1,18 +1,18 @@
 class Reference < ActiveRecord::Base
-  belongs_to :user
-  has_and_belongs_to_many :tags
+  has_many :references_tags
+  has_many :tags, through: :references_tags
 
   validates :title, :publisher, :year, presence: true, if: "reference_type=='book'"
-  validate :author_xor_editor
-  validate :drop_unnecessary_fields
   validates :author, :title, :journal, :year, :volume, presence: true, if: "reference_type=='article'"
   validates :author, :title, :booktitle, :year, presence: true, if: "reference_type=='inproceeding'"
   validates :year, :volume, :series, numericality: { allow_blank: true }
 
-	scope :books, -> { where reference_type: 'book' }
+  validate :author_xor_editor
+  validate :drop_unnecessary_fields
+
+  scope :books, -> { where reference_type: 'book' }
   scope :articles, -> { where reference_type: 'article' }
   scope :inproceedings, -> { where reference_type: 'inproceeding' }
-
 
 
   def generate_citation_key(addition = '')
@@ -53,8 +53,8 @@ class Reference < ActiveRecord::Base
   def author_xor_editor
     if reference_type=='book'
       unless author.blank? ^ editor.blank?
-        errors.add(:author, "or editor must be specified, but not both")
-        errors.add(:editor, "or author must be specified, but not both")
+        errors.add(:author, 'or editor must be specified, but not both')
+        errors.add(:editor, 'or author must be specified, but not both')
       end
     end
   end

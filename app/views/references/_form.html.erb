@@ -1,13 +1,7 @@
 <%= form_for(@reference) do |f| %>
-
   <div class="field">
     <%= f.select :reference_type, options_for_select([['Book', 'book'], ['Article', 'article'], ['Inproceeding', 'inproceeding']], selected: @reference.reference_type) %>
   </div>
-  <% if User.first.nil? %>
-    <%= f.hidden_field :user_id, value: 0 %>
-  <% else %>
-    <%= f.hidden_field :user_id, value: User.first.id %>
-  <% end %>
   <div class="field reference_year">
     <%= f.label :year %><br>
     <%= f.number_field :year %>

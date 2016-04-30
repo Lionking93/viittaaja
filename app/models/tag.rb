@@ -1,5 +1,7 @@
 class Tag < ActiveRecord::Base
-	has_and_belongs_to_many :references
+	has_many :references_tags
+	has_many :references, through: :references_tags
+
 	validate :name_to_downcase
 
 	private

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root 'references#index'
 
-  resources :users
   resources :references
 
   get 'ngreferencelist', to:'references#nglist'
