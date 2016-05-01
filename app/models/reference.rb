@@ -37,6 +37,10 @@ class Reference < ActiveRecord::Base
     creator.split(',').map { |c| c.strip }
   end
 
+  def creators_for_bibtex
+    creators.join(' and ')
+  end
+
   private
   def drop_unnecessary_fields
   	if self.reference_type=='book'
