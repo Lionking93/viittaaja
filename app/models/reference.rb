@@ -43,22 +43,22 @@ class Reference < ActiveRecord::Base
 
   private
   def drop_unnecessary_fields
-  	if self.reference_type=='book'
-  		self.journal = ''
-  		self.pages = ''
-  		self.booktitle = ''
-  		self.address = ''
-  		self.organization = ''
-  	end
-  	if self.reference_type=='article'
-  		self.editor = ''
-  		self.series = ''
-  		self.edition = ''
-  	end
-  	if self.reference_type=='inproceeding'
-  		self.edition = ''
-  		self.journal = ''
-  	end
+    if self.reference_type=='book'
+      self.journal = ''
+      self.pages = ''
+      self.booktitle = ''
+      self.address = ''
+      self.organization = ''
+    end
+    if self.reference_type=='article'
+      self.editor = ''
+      self.series = ''
+      self.edition = ''
+    end
+    if self.reference_type=='inproceeding'
+      self.edition = ''
+      self.journal = ''
+    end
   end
 
   private
