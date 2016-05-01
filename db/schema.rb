@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160430170301) do
+ActiveRecord::Schema.define(version: 20160501182904) do
 
   create_table "referencelists", force: :cascade do |t|
     t.integer  "user_id"

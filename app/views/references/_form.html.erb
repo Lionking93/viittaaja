@@ -11,7 +11,7 @@
     <%= f.text_field :publisher %>
   </div>
   <div class="field reference_author">
-    <%= f.label :author %><br>
+    <%= f.label :author, value:'Author (Surename Forename, multiple authors divided by commas)' %><br>
     <%= f.text_field :author %>
   </div>
   <div class="field reference_title">
@@ -27,7 +27,7 @@
     <%= f.text_field :booktitle %>
   </div>
   <div class="field reference_editor">
-    <%= f.label :editor %><br>
+    <%= f.label :editor, value:'Editor (Surename Forename, multiple authors divided by commas)' %><br>
     <%= f.text_field :editor %>
   </div>
   <div class="field reference_address">

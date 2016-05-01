@@ -16,7 +16,11 @@ class Reference < ActiveRecord::Base
 
 
   def generate_citation_key(addition = '')
-    key = "#{self.creator[0,2].downcase}#{self.year}#{addition}"
+    names = ""
+
+    self.creators.each { |c| names += c[0,2].downcase }
+
+    key = "#{names}#{self.year}#{addition}"
 
     nextChar = addition.empty? ? 'a' : (addition.ord + 1).chr
     key = self.generate_citation_key(nextChar) if Reference.where(citation_key:key).any?
@@ -27,6 +31,10 @@ class Reference < ActiveRecord::Base
   def creator
     return editor if author.nil? or author.empty?
     author
+  end
+
+  def creators
+    creator.split(',').map { |c| c.strip }
   end
 
   private
