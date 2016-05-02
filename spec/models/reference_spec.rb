@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Reference, type: :model do
   it "with proper inputs, is valid and is saved" do
-    reference = Reference.create year:"2016", publisher:"Jorman Kustantamo", author:"Suppo Taalasmaa", title:"Ovi auki tai tapahtuu hirveitä", address:"Mikä?", pages:"666", volume:"1", edition:"Ensimmäinen painos", month:"1", series:"1", note:"hirveetä puuroo hyi"
+    reference = Reference.create reference_type: "book", year:"2016", publisher:"Jorman Kustantamo", author:"Suppo Taalasmaa", title:"Ovi auki tai tapahtuu hirveitä", address:"Mikä?", pages:"666", volume:"1", edition:"Ensimmäinen painos", month:"1", series:"1", note:"hirveetä puuroo hyi"
 
     expect(reference.valid?).to be(true)
     expect(Reference.count).to eq(1)
