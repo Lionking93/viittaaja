@@ -1,5 +1,4 @@
 class ReferencesController < ApplicationController
-  include ReferenceTags
   before_action :set_reference, only: [:show, :edit, :update, :destroy]
 
   # GET /references
@@ -28,7 +27,7 @@ class ReferencesController < ApplicationController
   # GET /references/1/edit
   def edit
     @tags = Tag.all
-    @reference_tags = '' + tags_to_string(convert_reference_tag_names_to_array(@reference.tags))
+    @reference_tags = @reference.tags_as_string
   end
 
   # POST /references
@@ -37,13 +36,15 @@ class ReferencesController < ApplicationController
     @reference = Reference.new(reference_params)
     respond_to do |format|
       if @reference.save
-        add_reference_tags(@reference, params[:tags])
+        @reference.add_tags(params[:tags])
         @reference.update_attribute(:citation_key, @reference.generate_citation_key)
+
         format.html { redirect_to :root, notice: 'Reference was successfully created.' }
         format.json { render :show, status: :created, location: @reference }
       else
         @tags = Tag.all
-        @reference_tags = "" + tags_to_string(params[:tags]) unless params[:tags].nil?
+        @reference_tags = params[:tags].join(' ') unless params[:tags].nil?
+
         format.html { render :new }
         format.json { render json: @reference.errors, status: :unprocessable_entity }
       end
@@ -55,12 +56,14 @@ class ReferencesController < ApplicationController
   def update
     respond_to do |format|
       if @reference.update(reference_params)
-        update_reference_tags(@reference, params[:tags])
+        @reference.update_tags(params[:tags])
+
         format.html { redirect_to references_path, notice: 'Reference was successfully updated.' }
         format.json { render :show, status: :ok, location: @reference }
       else
         @tags = Tag.all
-        @reference_tags = "" + tags_to_string(params[:tags]) unless params[:tags].nil?
+        @reference_tags = params[:tags].join(' ') unless params[:tags].nil?
+
         format.html { render :edit }
         format.json { render json: @reference.errors, status: :unprocessable_entity }
       end

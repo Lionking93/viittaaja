@@ -14,6 +14,23 @@ class Reference < ActiveRecord::Base
   scope :articles, -> { where reference_type: 'article' }
   scope :inproceedings, -> { where reference_type: 'inproceeding' }
 
+  def creator
+    return editor if author.nil? or author.empty?
+    author
+  end
+
+  def creators
+    creator.split(',').map { |c| c.strip }
+  end
+
+  def creators_for_bibtex
+    creators.join(' and ')
+  end
+
+  def tags_as_string
+    self.tags.map(&:name).join(' ')
+  end
+
 
   def generate_citation_key(addition = '')
     names = ""
@@ -28,21 +45,37 @@ class Reference < ActiveRecord::Base
     key
   end
 
-  def creator
-    return editor if author.nil? or author.empty?
-    author
+
+
+  def add_tags(tags)
+    return if tags.nil?
+
+    tags.map(&:downcase).each do |t|
+      if Tag.find_by(name: t)
+        if self.tags.find_by(name: t).nil?
+          self.tags << Tag.find_by(name: t)
+        end
+      else
+        self.tags.create(name: t)
+      end
+    end
+    tags
   end
 
-  def creators
-    creator.split(',').map { |c| c.strip }
+  def update_tags(new_tags)
+    updated_tags = self.add_tags(new_tags) || []
+
+    self.delete_leftover_tags(updated_tags)
   end
 
-  def creators_for_bibtex
-    creators.join(' and ')
+  def delete_leftover_tags(updated_tags)
+    self.tags.each do |t|
+      unless updated_tags.include? t.name
+        tag = Tag.find_by(name: t.name)
+        self.tags.delete(tag.id)
+      end
+    end
   end
-
-
-
 
 
   private
