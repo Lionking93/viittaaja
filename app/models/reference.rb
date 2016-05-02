@@ -41,6 +41,10 @@ class Reference < ActiveRecord::Base
     creators.join(' and ')
   end
 
+
+
+
+
   private
   def drop_unnecessary_fields
     if self.reference_type=='book'
