@@ -14,6 +14,7 @@ class Reference < ActiveRecord::Base
   scope :articles, -> { where reference_type: 'article' }
   scope :inproceedings, -> { where reference_type: 'inproceeding' }
 
+
   def creator
     return editor if author.nil? or author.empty?
     author
@@ -46,24 +47,18 @@ class Reference < ActiveRecord::Base
   end
 
 
-
   def add_tags(tags)
-    return if tags.nil?
+    return [] if tags.nil?
 
     tags.map(&:downcase).each do |t|
-      if Tag.find_by(name: t)
-        if self.tags.find_by(name: t).nil?
-          self.tags << Tag.find_by(name: t)
-        end
-      else
-        self.tags.create(name: t)
-      end
+      self.tags << Tag.find_or_create_by(name: t)
     end
+
     tags
   end
 
   def update_tags(new_tags)
-    updated_tags = self.add_tags(new_tags) || []
+    updated_tags = self.add_tags(new_tags)
 
     self.delete_leftover_tags(updated_tags)
   end
