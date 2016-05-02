@@ -2,13 +2,7 @@ module BibtexConverter
   extend ActiveSupport::Concern
 
   def convert(data)
-    all_converted = []
-
-    data.each do |datum|
-      all_converted << convert_one(datum)
-    end
-
-    all_converted
+    data.map { |datum| convert_one(datum) }
   end
 
   def convert_one(data)
