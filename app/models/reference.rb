@@ -47,29 +47,19 @@ class Reference < ActiveRecord::Base
   end
 
 
-  def add_tags(tags)
-    return [] if tags.nil?
-
-    tags.map(&:downcase).each do |t|
+  def add_tags(new_tags)
+    new_tags && new_tags.map(&:downcase).each do |t|
       self.tags << Tag.find_or_create_by(name: t)
     end
-
-    tags
   end
 
   def update_tags(new_tags)
-    updated_tags = self.add_tags(new_tags)
-
-    self.delete_leftover_tags(updated_tags)
+    add_tags(new_tags)
+    delete_leftover_tags(new_tags||[])
   end
 
   def delete_leftover_tags(updated_tags)
-    self.tags.each do |t|
-      unless updated_tags.include? t.name
-        tag = Tag.find_by(name: t.name)
-        self.tags.delete(tag.id)
-      end
-    end
+    (tags-updated_tags).each &:delete
   end
 
 
