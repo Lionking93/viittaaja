@@ -15,19 +15,6 @@ class Reference < ActiveRecord::Base
   scope :inproceedings, -> { where reference_type: 'inproceeding' }
 
 
-  def book?
-    reference_type == 'book'
-  end
-
-  def article?
-    reference_type == 'article'
-  end
-
-  def inproceeding?
-    reference_type == 'inproceeding'
-  end
-
-
   def creator
     return editor if author.nil? or author.empty?
     author
@@ -78,11 +65,11 @@ class Reference < ActiveRecord::Base
 
   private
   def drop_unnecessary_fields
-    useless = [:journal=, :pages=, :booktitle=, :address=, :organization=] if self.book?
-    useless = [:editor=, :series=, :edition=] if self.article?
-    useless = [:edition=, :journal=] if self.inproceeding?
+    useless = { book: [:journal=, :pages=, :booktitle=, :address=, :organization=],
+                article: [:editor=, :series=, :edition=],
+                inproceeding: [:edition=, :journal=]}
 
-    useless.each { |field| self.send(field, '') }
+    useless[reference_type.to_sym].each { |field| self.send(field, '') }
   end
 
   private
