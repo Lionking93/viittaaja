@@ -7,39 +7,24 @@ module BibtexConverter
 
   def convert_one(data)
     converted = []
+    fields = [:year, :publisher, :author, :title, :address, :pages, :volume, :edition,
+              :month, :series, :note, :journal, :number, :key, :booktitle, :editor, :organization]
 
-    converted << "@Book{#{data.citation_key}," if data.reference_type == 'book'
-    converted << "@Article{#{data.citation_key}," if data.reference_type == 'article'
-    converted << "@Inproceedings{#{data.citation_key}," if data.reference_type == 'inproceeding'
-    converted << "    year = {#{data.year}}," unless data.year.nil?
-    converted << "    publisher = {#{self.fix_special(data.publisher)}}," unless data.publisher.nil? || data.publisher.empty?
-    converted << "    author = {#{self.fix_special(data.creators_for_bibtex)}}," unless data.author.nil? || data.author.empty?
-    converted << "    title = {#{self.fix_special(data.title)}}," unless data.title.nil? || data.title.empty?
-    converted << "    address = {#{self.fix_special(data.address)}}," unless data.address.nil? || data.address.empty?
-    converted << "    pages = {#{self.fix_special(data.pages)}}," unless data.pages.nil? || data.pages.empty?
-    converted << "    volume = {#{data.volume}}," unless data.volume.nil?
-    converted << "    edition = {#{self.fix_special(data.edition)}}," unless data.edition.nil? || data.edition.empty?
-    converted << "    month = {#{data.month}}," unless data.month.nil? || data.month.empty?
-    converted << "    series = {#{data.series}}," unless data.series.nil?
-    converted << "    note = {#{self.fix_special(data.note)}}," unless data.note.nil? || data.note.empty?
-    converted << "    journal = {#{self.fix_special(data.journal)}}," unless data.journal.nil? || data.journal.empty?
-    converted << "    number = {#{data.number}}," unless data.number.nil?
-    converted << "    key = {#{self.fix_special(data.key)}}," unless data.key.nil? || data.key.empty?
-    converted << "    booktitle = {#{self.fix_special(data.booktitle)}}," unless data.booktitle.nil? || data.booktitle.empty?
-    converted << "    editor = {#{self.fix_special(data.creators_for_bibtex)}}," unless data.editor.nil? || data.editor.empty?
-    converted << "    organization = {#{self.fix_special(data.organization)}}," unless data.organization.nil? || data.organization.empty?
-    converted << "}"
+    converted << "@#{data.reference_type.humanize}#{data.reference_type == 'inproceeding' ? 's' : ''}{#{data.citation_key},"
 
-    converted
+    fields.map do |f|
+      converted << "    #{f.to_s} = {#{fix_special((f == :author or f == :editor) ? data.send(f, true) : data.send(f))}}," unless data.send(f).blank?
+    end
+
+    converted << '}'
   end
 
   def fix_special(str)
-    str.gsub! 'Ä', '\\"{A}'
-    str.gsub! 'ä', '\\"{a}'
-    str.gsub! 'Ö', '\\"{O}'
-    str.gsub! 'ö', '\\"{o}'
-    str.gsub! 'Å', '\\AA'
-    str.gsub! 'å', '\\aa'
+    return str unless str.is_a? String
+    fix = { 'Ä' => '\\"{A}', 'ä' => '\\"{a}', 'Ö' => '\\"{O}', 'ö' => '\\"{o}', 'Å' => '\\AA', 'å' => '\\aa' }
+
+    fix.map { |from, to| str.gsub! from, to }
+
     str
   end
 

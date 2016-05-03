@@ -15,6 +15,16 @@ class Reference < ActiveRecord::Base
   scope :inproceedings, -> { where reference_type: 'inproceeding' }
 
 
+  def author(multiple = false)
+    return read_attribute(:author) unless multiple
+    read_attribute(:author).split(',').map { |c| c.strip }.join(' and ')
+  end
+
+  def editor(multiple = false)
+    return read_attribute(:editor) unless multiple
+    read_attribute(:editor).split(',').map { |c| c.strip }.join(' and ')
+  end
+
   def creator
     return editor if author.nil? or author.empty?
     author
@@ -22,10 +32,6 @@ class Reference < ActiveRecord::Base
 
   def creators
     creator.split(',').map { |c| c.strip }
-  end
-
-  def creators_for_bibtex
-    creators.join(' and ')
   end
 
   def tags_as_string
